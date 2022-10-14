@@ -1,5 +1,15 @@
 :root {
-    --navBarBorder: rgba(0, 0, 0, 1);
+    --background: rgba(18, 18, 18, 1);
+    --lighterOverlay: rgba(255, 255, 255, 0.05);
+    --lightOverlay: rgba(255, 255, 255, 0.1);
+    --mediumOverlay: rgba(255, 255, 255, 0.2);
+    --darkOverlay: rgba(255, 255, 255, 0.3);
+    --darkestOverlay: rgba(255, 255, 255, 0.35);
+
+
+    --activeNavBar: rgba(255, 0, 0, 0.8);
+
+    --mainFont: rgba(255, 255, 255, 1);
 }
 
 html, body {
@@ -7,7 +17,8 @@ html, body {
     padding: 0;
     font-size: 100%;
 
-    background-color: lightgray;
+    color: var(--mainFont);
+    background-color: var(--background);
 }
 
 * {
@@ -18,15 +29,34 @@ html, body {
 
 .navBar {
     display: flex;
-
-    border-bottom: 1px solid var(--navBarBorder);
+    background-color: var(--lighterOverlay);
 }
 
 .navItem {
     flex: 0 0 max-content;
 
-    padding: 1rem;
+    margin: 0 0.5rem;
+    transition-duration: 0.2s;
 }
+
+.navItemActive {
+    border-bottom: 3px solid var(--activeNavBar);
+}
+
+.navBarLink {
+    display: block;
+    flex: 0 0 max-content;
+
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    transition-duration: 0.2s;
+}
+
+.navBarLink:hover {
+    background-color: var(--lightOverlay);
+}
+
 
 .navSpace {
     flex: 1 0 0;
