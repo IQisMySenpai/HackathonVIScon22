@@ -51,3 +51,6 @@ students can exchange information about courses at ETH.
 - [Javascript](https://www.javascript.com)
 - [CSS](https://developer.mozilla.org/en-US/docs/Glossary/CSS)
 - [HTML](https://developer.mozilla.org/en-US/docs/Glossary/HTML)
+
+## To-Do
+- [ ] Create a database
