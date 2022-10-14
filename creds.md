@@ -10,3 +10,13 @@ wsy6YW6AA1PIfhvA
 server
 oSzgVALXeU1X3xSA
 ```
+## Database
+```bash
+VVZpp
+```
+
+## Collections
+```bash
+lecturers
+lectures
+```
