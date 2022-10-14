@@ -1,0 +1,32 @@
+:root {
+    --navBarBorder: rgba(0, 0, 0, 1);
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+}
+
+* {
+    box-sizing: border-box;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.navBar {
+    display: flex;
+
+    border-bottom: 1px solid var(--navBarBorder);
+}
+
+.navItem {
+    flex: 0 0 max-content;
+
+    padding: 1rem;
+}
+
+.navSpace {
+    flex: 1 0 0;
+}
+
