@@ -2,9 +2,9 @@
     --background: rgba(18, 18, 18, 1);
     --lighterOverlay: rgba(255, 255, 255, 0.05);
     --lightOverlay: rgba(255, 255, 255, 0.1);
-    --mediumOverlay: rgba(255, 255, 255, 0.2);
-    --darkOverlay: rgba(255, 255, 255, 0.3);
-    --darkestOverlay: rgba(255, 255, 255, 0.35);
+    --mediumOverlay: rgba(255, 255, 255, 0.15);
+    --darkOverlay: rgba(255, 255, 255, 0.2);
+    --darkestOverlay: rgba(255, 255, 255, 0.25);
 
 
     --activeNavBar: rgba(255, 0, 0, 0.8);
@@ -75,7 +75,7 @@ main {
 
     width: 70%;
     padding: 1rem 3rem;
-    background-color: white;
+    background-color: var(--lighterOverlay);
     margin: 1rem 0;
 }
 
