@@ -89,6 +89,8 @@ main {
 
 .courseSummary {
     flex: 1 0 max-content;
+    text-align: justify;
+    margin: 0 1rem 0 0;
 }
 
 .courseProfile {
