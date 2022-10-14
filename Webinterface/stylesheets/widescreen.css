@@ -104,9 +104,96 @@ main {
     width: 100%;
 }
 
+.courseTags {
+    display: flex;
+    flex-wrap: wrap;
+
+    margin: 1rem 0 0 0;
+}
+
 .courseTag {
+    width: max-content;
+
     background-color: darkgray;
     border-radius: 0.6rem;
-    width: max-content;
     padding: 0.1rem 0.5rem;
+    margin: 0.1rem 0.3rem;
+}
+
+.courseTag:first-child{
+    margin: 0.1rem 0.3rem 0.1rem 0;
+}
+
+.courseTag:last-child {
+    margin: 0.1rem 0 0.1rem 0.3rem;
+}
+
+.courseRatings {
+    display: flex;
+    flex-wrap: wrap;
+
+    margin: 1rem 0 0 0;
+}
+
+.courseRating {
+    padding: 0 0.5rem;
+    border-right: 1px solid var(--mainFont);
+}
+
+.courseRating:first-child {
+    padding: 0.1rem 0.5rem 0.1rem 0;
+}
+
+.courseRating:last-child {
+    padding: 0.1rem 0 0.1rem 0.5rem;
+    border-right: none;
+}
+
+.courseTabs {
+    display: flex;
+    flex-wrap: wrap;
+
+    margin: 1rem 0 0 0;
+}
+
+.courseTab {
+    width: max-content;
+
+    border-radius: 5px;
+    background-color: var(--lightOverlay);
+    padding: 0.5rem 1rem;
+    margin: 0.1rem 0.3rem;
+}
+
+.newReviewContent {
+    display: flex;
+}
+
+.newReviewTexts {
+    flex: 1 0 70%;
+    flex-wrap: wrap;
+    display: flex;
+}
+
+.newReviewTextArea {
+    flex: 0 0 100%;
+    resize: none;
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+.newReviewPos, .newReviewNeg {
+    flex: 0 0 50%;
+    flex-wrap: wrap;
+    display: flex;
+    resize: none;
+}
+
+.newReviewRating {
+    flex: 0 0 30%;
+    resize: none;
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
 }
