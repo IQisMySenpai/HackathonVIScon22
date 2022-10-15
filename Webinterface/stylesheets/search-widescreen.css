@@ -1,0 +1,39 @@
+.lectures {
+    width: 80%;
+    margin: 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.lecture {
+    padding: 0.5rem 1rem;
+    background-color: var(--section-background);
+    border: var(--section-border);
+    width: 15rem;
+    margin: 1rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.lectureHeader {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.lectureAddition {
+    font-size: 0.9rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.lectureDescription {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
