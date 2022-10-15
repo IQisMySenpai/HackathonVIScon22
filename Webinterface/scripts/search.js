@@ -24,7 +24,7 @@ window.addEventListener('load', function() {
         url: '/api/tags',
         method: 'GET',
         success: function(data) {
-            createTags(data['tags']);
+            createTags(JSON.parse(data)['tags']);
         },
         error: function(data) {
             alert('Error while running tags:\n\n' + data.responseText);
