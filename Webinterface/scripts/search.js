@@ -34,7 +34,7 @@ window.addEventListener('load', function() {
 
 function createTags (tags) {
     for (let i = 0, len = tags.length; i < len; i++) {
-        $('.tags').append('<div class="tag" data-name="' + tags[i]['name'] + '" style="background-color: ' + tags[i]['color'] + '">' + tags[i]['name'] + '</div>');
+        $('.tags').append('<div class="tag" data-name="' + tags[i]['id'] + '" style="background-color: ' + tags[i]['color'] + '">' + tags[i]['name'] + '</div>');
     }
 }
 
