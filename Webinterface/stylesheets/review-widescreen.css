@@ -1,0 +1,117 @@
+.reviews {
+    width: 70%;
+    padding: 1rem 3rem;
+    background-color: var(--lighterOverlay);
+    margin: 1rem 0;
+}
+
+.newReviewContent {
+    display: flex;
+}
+
+.newReviewTexts {
+    flex: 1 0 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.newReviewTextArea {
+    resize: none;
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    height: 6rem;
+}
+
+.newReviewPosVNegs {
+    display: flex
+}
+
+.newReviewPos, .newReviewNeg {
+    flex: 0 1 50%;
+    display: flex;
+    resize: none;
+    height: 6rem;
+    border-radius: 5px;
+}
+
+.newReviewPos {
+    margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+.newReviewNeg {
+    margin: 0.5rem 0 0.5rem 0.5rem;
+}
+
+.newReviewRating {
+    flex: 0 0 30%;
+    margin: 0 0 0 1rem;
+}
+
+.newReviewRatingStars {
+    position: relative;
+}
+
+.newReviewRatingStars input {
+    opacity: 0;
+    cursor: pointer;
+    position: absolute;
+    width: 100%;
+}
+
+.oldReviews {
+    display: flex;
+    flex-direction: column;
+    margin: 3rem 0 0 0;
+}
+
+.reviewContent {
+    display: flex;
+}
+
+.reviewTexts {
+    flex: 1 0 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.reviewTextArea {
+    margin: 0.5rem 0;
+}
+
+.reviewPosVNegs {
+    display: flex
+}
+
+.reviewPos, .reviewNeg {
+    flex: 0 1 50%;
+    display: flex;
+    resize: none;
+    border-radius: 5px;
+}
+
+.reviewPos {
+    margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+.reviewNeg {
+    margin: 0.5rem 0 0.5rem 0.5rem;
+}
+
+.reviewRating {
+    flex: 0 0 30%;
+    margin: 0 0 0 1rem;
+}
+
+.reviewUsername, .reviewDate, .reviewReport {
+    display: inline-block;
+}
+
+.reviewReport {
+    color: var(--darkestOverlay);
+}
+
+.reviewHeader {
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem 0;
+}

@@ -4,7 +4,16 @@
     <meta charset="UTF-8">
     <title>This is my Course</title>
 
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="../scripts/course.js"></script>
+    <script src="../scripts/review.js"></script>
+    <script src="../scripts/courseView.js"></script>
+
     <link rel="stylesheet" type="text/css" href="../stylesheets/widescreen.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/review-widescreen.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/course-widescreen.css">
+    <link rel="stylesheet" type="text/css" href="../fontawesome/css/all.min.css">
 </head>
 <body>
     <div class="navBar">
@@ -16,7 +25,7 @@
     </div>
 
     <main>
-        <div class="course">
+        <!--<div class="course">
             <div class="courseHeader">
                 Ueli Love
             </div>
@@ -48,25 +57,85 @@
                 <div class="courseTab">Reviews</div>
                 <div class="courseTab">Questions</div>
             </div>
-            <div class="reviews">
-                <div class="newReview">
-                    <div class="newReviewHeader">
-                        Write a review
-                    </div>
-                    <div class="newReviewContent">
-                        <div class="newReviewTexts">
-                            <textarea class="newReviewTextArea" placeholder="Write your review here"></textarea>
+        </div>
+        <div class="reviews">
+            <div class="reviewHeader">
+                Write a review
+            </div>
+            <div class="newReview">
+
+                <div class="newReviewContent">
+                    <div class="newReviewTexts">
+                        <textarea class="newReviewTextArea" placeholder="Write your review here"></textarea>
+                        <div class="newReviewPosVNegs">
                             <textarea class="newReviewPos" placeholder="Positives"></textarea>
                             <textarea class="newReviewNeg" placeholder="Negatives"></textarea>
                         </div>
+
+                    </div>
+                    <div class="newReviewRatings">
                         <div class="newReviewRating">
-
+                            <div class="newReviewRatingHeader">
+                                Hardness
+                            </div>
+                            <div class="newReviewRatingStars">
+                                <input type="range" min="0" max="10" value="5">
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star-half-stroke"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
                         </div>
-
                     </div>
                 </div>
             </div>
-        </div>
+
+
+            <div class="oldReviews">
+                <div class="reviewHeader">
+                    Other Reviews
+                </div>
+                <div class="review">
+                    <div class="reviewInfo">
+                        <div class="reviewUsername">
+                            IQisMySenpai
+                        </div>
+                        -
+                        <div class="reviewDate">
+                            15.10.2022
+                        </div>
+                        <div class="reviewReport">
+                            - Report
+                        </div>
+                    </div>
+                    <div class="reviewContent">
+                        <div class="reviewTexts">
+                            <div class="reviewTextArea">sfghfsdhjdsfh</div>
+                            <div class="reviewPosVNegs">
+                                <div class="reviewPos">dfsiuhgfaiugh</div>
+                                <div class="reviewNeg">soijgdfoi;fjdg</div>
+                            </div>
+
+                        </div>
+                        <div class="reviewRatings">
+                            <div class="reviewRating">
+                                <div class="reviewRatingHeader">
+                                    Hardness
+                                </div>
+                                <div class="reviewRatingStars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star-half-stroke"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
     </main>
 </body>
 </html>
