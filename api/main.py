@@ -1,5 +1,7 @@
-from fastapi import FastAPI, Response
+from fastapi import FastAPI, Response, Query
 from fastapi.staticfiles import StaticFiles
+
+from typing import List
 
 from courses import *
 from db import mongo
@@ -27,8 +29,8 @@ def read_courses(response: Response, page: int = 0):
     return list_courses(mongo, response, page)
 
 @api.get("/query/courses")
-def read_courses(query: str, response: Response, page: int = 0):
-    return query_courses(mongo, response, query, page)
+def read_courses(response: Response, query: str = None,  tags: List[str] = Query(default=None), page: int = 0):
+    return query_courses(mongo, response, query, tags, page)
 
 @api.post("/courses")
 def post_course(course: Course, response: Response):

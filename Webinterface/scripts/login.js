@@ -2,11 +2,19 @@ window.addEventListener('load', function() {
     let params = getParameters();
 
     if (params['id_token'] !== undefined) {
-        if (getCookie('logged_in' !== 'true')) {
-            document.cookie = "logged_in=true";
-            document.cookie = "id_token=" + params['id_token'];
-        }
-        $('.login').find('.navBarLink').html('Logout');
+        document.cookie = 'id_token=' + params['id_token'] + '; path=/';
+        history.pushState("", document.title, window.location.pathname);
+    }
+    let cookies = getCookies();
+    if (cookies['id_token'] !== '' && cookies['id_token'] !== undefined) {
+        let button = $('.login').find('.navBarLink');
+
+        button.html('Logout');
+        button.on('click', function() {
+            button.off('click');
+            document.cookie = 'id_token=; expires=Thu, 01 Jan 1970; path=/';
+            window.setTimeout(loginButton, 100);
+        });
     } else {
         loginButton();
     }
@@ -51,18 +59,21 @@ function getParameters()
     return parameters;
 }
 
-function getCookie(cname) {
-    let name = cname + "=";
+function getCookies() {
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
+    let cookies = {};
     for(let i = 0; i <ca.length; i++) {
         let c = ca[i];
         while (c.charAt(0) === ' ') {
             c = c.substring(1);
         }
-        if (c.indexOf(name) === 0) {
-            return c.substring(name.length, c.length);
-        }
+        let split = c.split('=');
+        cookies[split[0]] = split[1];
     }
-    return "";
+    return cookies;
+}
+
+function version () {
+    return '1.0.0';
 }

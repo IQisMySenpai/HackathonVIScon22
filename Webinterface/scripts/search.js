@@ -34,28 +34,29 @@ window.addEventListener('load', function() {
 
 function createTags (tags) {
     for (let i = 0, len = tags.length; i < len; i++) {
-        $('.tags').append('<div class="tag" data-name="' + tags[i]['name'] + '" style="background-color: ' + tags[i]['color'] + '">' + tags[i]['name'] + '</div>');
+        $('.tags').append('<div class="tag" data-name="' + tags[i]['id'] + '" style="background-color: ' + tags[i]['color'] + '">' + tags[i]['name'] + '</div>');
     }
 }
 
 function search () {
+    console.log('search');
     let tags = [];
     $('.searchTags .tag').each(function() {
         tags.push($(this).attr('data-name'));
     });
 
-    /*$.ajax({
-        url: '/api/courses',
+    $.ajax({
+        url: '/api/query/courses',
         method: 'GET',
         data: {
-            tags: tags,
-            search: $('.search').val()
+            tags: tags.toString(),
+            query: $('.search').val()
         },
         success: function(data) {
-
+            console.log(data);
         },
         error: function(data) {
             alert('Error while running search:\n\n' + data.responseText);
         }
-    });*/
+    });
 }
