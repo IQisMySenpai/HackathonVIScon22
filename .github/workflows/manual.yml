@@ -29,10 +29,12 @@ jobs:
         script: |
           whoami
           cd HackathonVIScon22
-          git branch alex
           git pull
-          tmux
-          uvicorn main:app
+          cd ..
+          tmux kill-session
+          ./run.sh
+          
+          
 
 
 
