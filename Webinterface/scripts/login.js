@@ -1,7 +1,8 @@
 window.addEventListener('load', function() {
     let params = getParameters();
+    let cookies = getCookies();
 
-    if (getCookie('id_token') !== '' || params['id_token'] !== undefined) {
+    if (cookies['id_token'] !== '' || cookies['id_token'] !== undefined) {
         let button = $('.login').find('.navBarLink');
 
         button.html('Logout');
