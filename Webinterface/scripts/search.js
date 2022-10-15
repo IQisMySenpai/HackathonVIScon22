@@ -39,6 +39,7 @@ function createTags (tags) {
 }
 
 function search () {
+    console.log('search');
     let tags = [];
     $('.searchTags .tag').each(function() {
         tags.push($(this).attr('data-name'));
