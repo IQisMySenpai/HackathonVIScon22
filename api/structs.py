@@ -2,8 +2,10 @@ import time
 from typing import Union, List
 from pydantic import BaseModel
 
+
 class User(BaseModel):
     preferred_username: str
+
 
 class Tag(BaseModel):
     id: Union[str, None] = None
@@ -25,7 +27,6 @@ class Tag(BaseModel):
         if tags is None:
             return None
         return [tag.db_dict() for tag in tags]
-
 
     def from_dict(self, d):
         self.id = d.get("_id")
@@ -96,7 +97,8 @@ class Review(BaseModel):
         return self
 
     def out_dict(self):
-        return {"id": self.id.__str__(), "first_name": self.first_name, "last_name": self.last_name, "title": self.title, "department": self.department}
+        return {"id": self.id.__str__(), "first_name": self.first_name, "last_name": self.last_name,
+                "title": self.title, "department": self.department}
 
 
 class Course(BaseModel):
@@ -144,14 +146,14 @@ class Course(BaseModel):
             for lecturer_id in d["lecturer"]:
                 lecturer = Lecturer()
                 lecturer.id = lecturer_id
-                #print(lecturer)
+                # print(lecturer)
                 self.lecturers.append(lecturer)
 
         return self
 
     def db_dict(self):
-         return {"_id": self.id,
-               "lecturer": Lecturer.out(self.lecturers), "tags": Tag.db_out(self.tags)}
+        return {"_id": self.id,
+                "lecturer": Lecturer.out(self.lecturers), "tags": Tag.db_out(self.tags)}
 
     def out_dict(self):
         return {"id": self.id.__str__(), "title": self.title, "abstract": self.abstract,
@@ -159,7 +161,7 @@ class Course(BaseModel):
 
     def full_dict(self):
         return {"_id": self.id,
-               "lecturer": Lecturer.out(self.lecturers),
+                "lecturer": Lecturer.out(self.lecturers),
                 "tags": Tag.db_out(self.tags),
                 "segments": self.segments,
                 "readable_id": self.readable_id,
@@ -172,4 +174,4 @@ class Course(BaseModel):
                 "content": self.content,
                 "ratings": self.ratings
 
-        }
+                }
