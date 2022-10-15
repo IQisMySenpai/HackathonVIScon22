@@ -55,7 +55,7 @@
 .courseTag {
     width: max-content;
 
-    background-color: deepskyblue;
+    background-color: rgba(100, 149, 237, 1);
     color: var(--navbarColor);
     border-radius: 0.6rem;
     padding: 0.1rem 0.5rem;
