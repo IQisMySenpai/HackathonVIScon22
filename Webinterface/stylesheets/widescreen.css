@@ -1,15 +1,15 @@
 :root {
-    --background: rgba(18, 18, 18, 1);
-    --lighterOverlay: rgba(255, 255, 255, 0.05);
-    --lightOverlay: rgba(255, 255, 255, 0.1);
-    --mediumOverlay: rgba(255, 255, 255, 0.15);
-    --darkOverlay: rgba(255, 255, 255, 0.2);
-    --darkestOverlay: rgba(255, 255, 255, 0.25);
+    --background: rgba(255, 255, 255, 1);
+    --lighterOverlay: rgba(0, 0, 0, 0.05);
+    --lightOverlay: rgba(0, 0, 0, 0.1);
+    --mediumOverlay: rgba(0, 0, 0, 0.15);
+    --darkOverlay: rgba(0, 0, 0, 0.2);
+    --darkestOverlay: rgba(0, 0, 0, 0.25);
 
 
     --activeNavBar: rgba(255, 0, 0, 0.8);
 
-    --mainFont: rgba(255, 255, 255, 1);
+    --mainFont: rgba(40, 40, 40, 1);
 }
 
 html, body {

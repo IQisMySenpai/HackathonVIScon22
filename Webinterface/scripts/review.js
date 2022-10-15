@@ -66,47 +66,6 @@ class Review {
 
 }
 
-/*
-* <div class="review">
-                    <div class="reviewInfo">
-                        <div class="reviewUsername">
-                            IQisMySenpai
-                        </div>
-                        -
-                        <div class="reviewDate">
-                            15.10.2022
-                        </div>
-                        <div class="reviewReport">
-                            - Report
-                        </div>
-                    </div>
-                    <div class="reviewContent">
-                        <div class="reviewTexts">
-                            <div class="reviewTextArea">sfghfsdhjdsfh</div>
-                            <div class="reviewPosVNegs">
-                                <div class="reviewPos">dfsiuhgfaiugh</div>
-                                <div class="reviewNeg">soijgdfoi;fjdg</div>
-                            </div>
-
-                        </div>
-                        <div class="reviewRatings">
-                            <div class="reviewRating">
-                                <div class="reviewRatingHeader">
-                                    Hardness
-                                </div>
-                                <div class="reviewRatingStars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star-half-stroke"></i>
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-* */
-
 function getStars (rating = 0) {
     let stars = '';
     for (let i = 0; i < Math.floor(rating / 2); i++) {
@@ -122,14 +81,20 @@ function getStars (rating = 0) {
 }
 
 function starMove (element) {
+    starChange(element);
+
     $(element).on('mousemove', function() {
-        let rating = $(element).val();
-        let stars = getStars(rating);
-        $(element).siblings('.newReviewStars').html(stars);
+        starChange(element);
     });
 
     $(element).on('mouseup', function() {
         $(element).off('mousemove');
         $(element).off('mouseup');
     });
+}
+
+function starChange (element) {
+    let rating = $(element).val();
+    let stars = getStars(rating);
+    $(element).siblings('.newReviewStars').html(stars);
 }
