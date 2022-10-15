@@ -1,16 +1,14 @@
 window.addEventListener('load', function() {
     let params = getParameters();
 
-    if (getCookie('logged_in') !== 'true') {
+    if (getCookie('id_token') !== '' || params['id_token'] !== undefined) {
         let button = $('.login').find('.navBarLink');
 
         button.html('Logout');
         button.on('click', function() {
-            document.cookie = 'logged_in=;expires=Thu, 01 Jan 1970';
             document.cookie = 'id_token=;expires=Thu, 01 Jan 1970';
         });
     } else if (params['id_token'] !== undefined) {
-        document.cookie = "logged_in=true";
         document.cookie = "id_token=" + params['id_token'];
     } else {
         loginButton();
