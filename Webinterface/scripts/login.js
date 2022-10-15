@@ -31,7 +31,15 @@ function randstring(length) {
 
 function getParameters()
 {
-    let url = window.location.search.substring(1);
+    let url;
+    if (window.location.hash !== '') {
+        url = window.location.hash.substring(1);
+    } else if (window.location.search !== '') {
+        url = window.location.search.substring(1);
+    } else {
+        return {};
+    }
+
     let params = url.split('&');
 
     let parameters = {};
