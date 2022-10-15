@@ -1,8 +1,7 @@
-from mongo_api import MongoAPI
+from fastapi import FastAPI
 
-if __name__ == "__main__":
-    mongo = MongoAPI('vvzpp.5byhvi1.mongodb.net', 'VVZpp', 'server', 'Xr9wqtrvnlufZQho')
+app = FastAPI()
 
-print("I'm fucking Emilis")
-
-print("Alex did some stuff which is working... or not")
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
