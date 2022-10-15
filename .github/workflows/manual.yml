@@ -28,4 +28,13 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           whoami
-          ls -al
+          cd HackathonVIScon22
+          git branch alex
+          git pull
+          tmux
+          uvicorn main:app
+
+
+
+
+
