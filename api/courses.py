@@ -50,14 +50,14 @@ def list_lecturers(db: MongoAPI, response: Response):
     return pack_response(response, 200, "ok", {"lecturers": Lecturer.out(Lecturer.from_db(profs))})
 
 
-def load_courses_helper(courses, db: MongoAPI, response: Response):
+def load_courses_helper(courses: List[dict], db: MongoAPI, response: Response):
     if len(courses) == 0:
         return pack_response(response, 204, "No courses found.")
 
-    courses = Course.full_dict(courses)
-    load_lecturer_for_courses(db, courses)
+    course_list: List[Course] = Course.from_db(courses)
+    load_lecturer_for_courses(db, course_list)
 
-    return pack_response(response, 200, "ok", {"courses": Course.out(courses)})
+    return pack_response(response, 200, "ok", {"courses": Course().out(course_list)})
 
 
 def list_courses(db: MongoAPI, response: Response, page):

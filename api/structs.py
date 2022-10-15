@@ -102,7 +102,7 @@ class Review(BaseModel):
 
 
 class Course(BaseModel):
-    id: Union[str, None] = None
+    m_id: Union[str, None] = None
     segments: Union[list, None] = None
     readable_id: Union[str, None] = None
     title: Union[str, None] = None
@@ -122,10 +122,10 @@ class Course(BaseModel):
 
     @staticmethod
     def out(courses):
-        return [course.out_dict() for course in courses]
+        return [course.full_dict() for course in courses]
 
     def from_dict(self, d):
-        self.id = d.get("_id")
+        self.m_id = d.get("_id")
         self.title = d.get("title")
         self.abstract = d.get("abstract")
 
@@ -149,18 +149,19 @@ class Course(BaseModel):
                 # print(lecturer)
                 self.lecturers.append(lecturer)
 
+        print(self.m_id)
         return self
 
     def db_dict(self):
-        return {"_id": self.id,
+        return {"_id": self.m_id,
                 "lecturer": Lecturer.out(self.lecturers), "tags": Tag.db_out(self.tags)}
 
     def out_dict(self):
-        return {"id": self.id.__str__(), "title": self.title, "abstract": self.abstract,
+        return {"id": self.m_id.__str__(), "title": self.title, "abstract": self.abstract,
                 "lecturers": Lecturer.out(self.lecturers), "tags": Tag.out(self.tags)}
 
     def full_dict(self):
-        return {"_id": self.id,
+        return {"_id": str(self.m_id),
                 "lecturer": Lecturer.out(self.lecturers),
                 "tags": Tag.db_out(self.tags),
                 "segments": self.segments,
