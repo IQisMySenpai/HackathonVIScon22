@@ -69,9 +69,8 @@ class Review(BaseModel):
 
 class Course(BaseModel):
     id: Union[str, None] = None
-    name: Union[str, None] = None
-    addition: Union[str, None] = None
-    summary: Union[str, None] = None
+    title: Union[str, None] = None
+    abstract: Union[str, None] = None
     ratings: Union[int, None] = None
     tags: Union[list[Tag], None] = None
     lecturers: Union[list[Lecturer], None] = None
@@ -86,22 +85,28 @@ class Course(BaseModel):
 
     def from_dict(self, d):
         self.id = d["_id"]
-        self.name = d.get("name")
-        self.addition = d.get("addition")
+        self.title = d.get("title")
+        self.abstract = d.get("abstract")
 
         if "tags" in d:
             self.tags = Tag.from_db(d["tags"])
 
-        if "lecturers" in d:
-            self.lecturers = [Lecturer().from_db(l) for l in d["lecturers"]]
+        if "lecturer" in d:
+            self.lecturers = []
+            for lecturer_id in d["lecturer"]:
+                lecturer = Lecturer()
+                lecturer.id = lecturer_id
+                #print(lecturer)
+                self.lecturers.append(lecturer)
 
         return self
 
     def db_dict(self):
-        return {"name": self.name, "addition": self.addition,
-                "lecturers": Lecturer.out(self.lecturers), "tags": Tag.out(self.tags)}
+        return None
+        # return {"name": self.name, "addition": self.addition,
+        #       "lecturer": Lecturer.out(self.lecturers), "tags": Tag.out(self.tags)}
 
     def out_dict(self):
-        return {"id": self.id.__str__(), "name": self.name, "addition": self.addition,
+        return {"id": self.id.__str__(), "title": self.title, "abstract": self.abstract,
                 "lecturers": Lecturer.out(self.lecturers), "tags": Tag.out(self.tags)}
 
