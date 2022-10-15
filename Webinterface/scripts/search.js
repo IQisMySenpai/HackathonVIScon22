@@ -9,7 +9,7 @@ window.addEventListener('load', function() {
             let tag = elem.attr('data-name');
             elem.removeClass('selectedTag');
             $('div.searchTags .tag[data-name="' + tag + '"]').remove();
-        }§
+        }
     });
 
     $('.searchTags').on('click', '.tag', function() {
