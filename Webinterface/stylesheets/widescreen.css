@@ -1,22 +1,23 @@
 :root {
-    --background: rgba(18, 18, 18, 1);
-    --lighterOverlay: rgba(255, 255, 255, 0.05);
-    --lightOverlay: rgba(255, 255, 255, 0.1);
-    --mediumOverlay: rgba(255, 255, 255, 0.15);
-    --darkOverlay: rgba(255, 255, 255, 0.2);
-    --darkestOverlay: rgba(255, 255, 255, 0.25);
+    --background: rgba(240,248,255,1);
 
+    --navbarBackground: rgba(31, 29, 54, 1);
+    --navbarBackgroundHover: rgba(63, 51, 81, 1);
+    --navbarActive: rgba(233, 166, 166, 1);
+    --navbarColor: rgba(255, 255, 255, 1);
 
     --activeNavBar: rgba(255, 0, 0, 0.8);
 
-    --mainFont: rgba(255, 255, 255, 1);
+    --mainFont: rgba(50, 50, 50, 1);
+
+    --section-background: rgba(255, 250, 250, 1);
+    --section-border: 1px solid rgba(176, 196, 222, 1);
 }
 
 html, body {
     margin: 0;
     padding: 0;
     font-size: 100%;
-
     color: var(--mainFont);
     background-color: var(--background);
 }
@@ -24,12 +25,14 @@ html, body {
 * {
     box-sizing: border-box;
 
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
 }
 
 .navBar {
     display: flex;
-    background-color: var(--lighterOverlay);
+    background-color: var(--navbarBackground);
+    color: var(--navbarColor);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .navItem {
@@ -40,7 +43,7 @@ html, body {
 }
 
 .navItemActive {
-    border-bottom: 3px solid var(--activeNavBar);
+    border-bottom: 3px solid var(--navbarActive);
 }
 
 .navBarLink {
@@ -54,7 +57,7 @@ html, body {
 }
 
 .navBarLink:hover {
-    background-color: var(--lightOverlay);
+    background-color: var(--navbarBackgroundHover);
 }
 
 
@@ -66,5 +69,4 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }

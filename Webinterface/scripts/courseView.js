@@ -1,13 +1,16 @@
 window.addEventListener('load', function() {
     var course = new Course();
-    course.setCourseName('Test');
-    course.setCourseAddition('This is a cool course');
-    let desc = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-    course.setCourseDescription(desc, 'ueli.jpeg', 'Ueli', 'This is Ueli');
+    course.setCourseName('Diskrete Mathematik')
+    course.setCourseAddition('252-0025-01L');
+    let desc = 'Inhalt: Mathematisches Denken und Beweise, Abstraktion. Mengen, Relationen (z.B. Aequivalenz- und Ordnungsrelationen), Funktionen, (Un-)abzählbarkeit, Zahlentheorie, Algebra (Gruppen, Ringe, Körper, Polynome, Unteralgebren, Morphismen), Logik (Aussagen- und Prädikatenlogik, Beweiskalküle).<br><br>Hauptziele der Vorlesung sind (1) die Einführung der wichtigsten Grundbegriffe der diskreten Mathematik, (2) das Verständnis der Rolle von Abstraktion und von Beweisen und (3) die Diskussion einiger Anwendungen, z.B. aus der Kryptographie, Codierungstheorie und Algorithmentheorie.';
+    course.setCourseDescription(desc, 'ueli.jpeg', 'Ueli', 'Professor U. Maurer');
 
-    course.addCourseTags([{'name': 'test', 'color':'red'}, {'name': 'test2', 'color':'blue'}]);
-    course.addCourseRatings([{'name': 'Test', 'rating': 5}, {'name': 'Test2', 'rating': 3}]);
+    course.addCourseTags([{'name': 'Informatik', 'color': 'dark sea green'}, {'name': 'Sem 1', 'color':'orchid'}, {'name': 'GlasKlar', 'color':'salmon'}, {'name': 'Exam', 'color':'lightgreen'}]);
+    course.addCourseRatings([{'name': 'Difficulty', 'rating': 10}, {'name': 'Work', 'rating': 7}, {'name': 'Jokes', 'rating': 5}]);
 
     var review = new Review();
-    review.newReviewField([{'name': 'Test'}, {'name': 'Test2'}]);
+    review.newReviewField([{'name': 'Difficulty', 'rating': 10}, {'name': 'Work', 'rating': 7}, {'name': 'Jokes', 'rating': 5}]);
+    review.oldReviews();
+    review.addOldReview('Jannick', '15.10.2022', [{'name': 'Difficulty', 'rating': 8}, {'name': 'Work', 'rating': 9}, {'name': 'Jokes', 'rating': 10}], 'Really Hard Work. Fun Professor with good jokes', ['Interesting Topics', 'Good Stories', 'Good Script'], ['Hard Work for 7KP', 'Homework is corrected strictly']);
+    review.addOldReview('Zhao Na', '05.10.2022', [{'name': 'Difficulty', 'rating': 6}, {'name': 'Work', 'rating': 7}, {'name': 'Jokes', 'rating': 3}], 'Easy Peasy Lemon Squeezy', ['Ez 6 in my Exam'], ['No good Jokes']);
 });
