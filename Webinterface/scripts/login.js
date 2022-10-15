@@ -1,12 +1,17 @@
 window.addEventListener('load', function() {
     let params = getParameters();
 
-    if (params['id_token'] !== undefined) {
-        if (getCookie('logged_in' !== 'true')) {
-            document.cookie = "logged_in=true";
-            document.cookie = "id_token=" + params['id_token'];
-        }
-        $('.login').find('.navBarLink').html('Logout');
+    if (getCookie('logged_in') !== 'true') {
+        let button = $('.login').find('.navBarLink');
+
+        button.html('Logout');
+        button.on('click', function() {
+            document.cookie = 'logged_in=;expires=Thu, 01 Jan 1970';
+            document.cookie = 'id_token=;expires=Thu, 01 Jan 1970';
+        });
+    } else if (params['id_token'] !== undefined) {
+        document.cookie = "logged_in=true";
+        document.cookie = "id_token=" + params['id_token'];
     } else {
         loginButton();
     }
@@ -49,6 +54,21 @@ function getParameters()
     }
 
     return parameters;
+}
+
+function getCookies() {
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    let cookies = {};
+    for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') {
+            c = c.substring(1);
+        }
+        let split = c.split('=');
+        cookies[split[0]] = split[1];
+    }
+    return cookies;
 }
 
 function getCookie(cname) {
