@@ -99,8 +99,7 @@
 .reviewPos, .reviewNeg {
     flex: 0 1 50%;
     display: flex;
-    resize: none;
-    border-radius: 5px;
+    flex-direction: column;
 }
 
 .reviewPos {
