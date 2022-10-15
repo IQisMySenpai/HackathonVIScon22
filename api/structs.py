@@ -1,14 +1,14 @@
 import time
-
+from typing import Union
 from pydantic import BaseModel
 
 class User(BaseModel):
     preferred_username: str
 
 class Tag(BaseModel):
-    id: str | None
-    name: str | None
-    color: str | None
+    id: Union[str, None] = None
+    name: Union[str, None] = None
+    color: Union[str, None] = None
 
     @staticmethod
     def from_db(tags):
@@ -32,11 +32,11 @@ class Tag(BaseModel):
         return {"id": self.id.__str__(), "name": self.name, "color": self.color}
 
 class Lecturer(BaseModel):
-    id: str | None
-    first_name: str | None
-    last_name: str | None
-    title: str | None
-    department: str | None
+    id: Union[str, None] = None
+    first_name: Union[str, None] = None
+    last_name: Union[str, None] = None
+    title: Union[str, None] = None
+    department: Union[str, None] = None
 
     @staticmethod
     def from_db(profs):
@@ -60,21 +60,21 @@ class Lecturer(BaseModel):
         return {"id": self.id.__str__(), "first_name": self.first_name, "last_name": self.last_name, "title": self.title, "department": self.department}
 
 class Review(BaseModel):
-    id: str | None
-    date: int | None
-    rating: list | None
-    pos: list | None
-    neg: list | None
-    test: str | None
+    id: Union[str, None] = None
+    date: Union[int, None] = None
+    rating: Union[int, None] = None
+    pos: Union[int, None] = None
+    neg: Union[int, None] = None
+    test: Union[str, None] = None
 
 class Course(BaseModel):
-    id: str | None
-    name: str | None
-    addition: str | None
-    summary: str | None
-    ratings: list | None
-    tags: list[Tag] | None
-    lecturers: list[Lecturer] | None
+    id: Union[str, None] = None
+    name: Union[str, None] = None
+    addition: Union[str, None] = None
+    summary: Union[str, None] = None
+    ratings: Union[int, None] = None
+    tags: Union[list[Tag], None] = None
+    lecturers: Union[list[Lecturer], None] = None
 
     @staticmethod
     def from_db(courses):
