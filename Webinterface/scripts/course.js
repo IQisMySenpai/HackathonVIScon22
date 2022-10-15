@@ -81,7 +81,7 @@ class Course {
         if (!this._ratingCreated) {
             this.createCourseRatings();
         }
-        this._course.find('.courseRatings').append('<div class="courseRating" data-name="' + name + '">' + name + ': ' + rating + '/10</div>');
+        this._course.find('.courseRatings').append('<div class="courseRating" data-name="' + name + '"><div class="courseRatingName">' + name + ':</div>&emsp;' + rating + '/10</div>');
         return this;
     }
 

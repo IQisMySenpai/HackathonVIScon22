@@ -25,7 +25,7 @@ class Review {
     oldReviews() {
         if (!this._reviews) {
             this._oldReviews = $('<div class="oldReviews"><div class="reviewHeader">Reviews</div></div>');
-            this._review.append(this._oldReviews);
+            this._review.parent().append(this._oldReviews);
             this._reviews = true;
         }
 
