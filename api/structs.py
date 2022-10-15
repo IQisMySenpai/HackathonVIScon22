@@ -1,9 +1,11 @@
 import time
-from typing import Union
+from typing import Union, List
 from pydantic import BaseModel
+
 
 class User(BaseModel):
     preferred_username: str
+
 
 class Tag(BaseModel):
     id: Union[str, None] = None
@@ -28,8 +30,10 @@ class Tag(BaseModel):
 
     def db_dict(self):
         return {"name": self.name, "color": self.color}
+
     def out_dict(self):
         return {"id": self.id.__str__(), "name": self.name, "color": self.color}
+
 
 class Lecturer(BaseModel):
     id: Union[str, None] = None
@@ -57,7 +61,9 @@ class Lecturer(BaseModel):
         return self
 
     def out_dict(self):
-        return {"id": self.id.__str__(), "first_name": self.first_name, "last_name": self.last_name, "title": self.title, "department": self.department}
+        return {"id": self.id.__str__(), "first_name": self.first_name, "last_name": self.last_name,
+                "title": self.title, "department": self.department}
+
 
 class Review(BaseModel):
     id: Union[str, None] = None
@@ -67,13 +73,14 @@ class Review(BaseModel):
     neg: Union[int, None] = None
     test: Union[str, None] = None
 
+
 class Course(BaseModel):
     id: Union[str, None] = None
     title: Union[str, None] = None
     abstract: Union[str, None] = None
     ratings: Union[int, None] = None
-    tags: Union[list[Tag], None] = None
-    lecturers: Union[list[Lecturer], None] = None
+    tags: Union[List[Tag], None] = None
+    lecturers: Union[List[Lecturer], None] = None
 
     @staticmethod
     def from_db(courses):
@@ -96,7 +103,7 @@ class Course(BaseModel):
             for lecturer_id in d["lecturer"]:
                 lecturer = Lecturer()
                 lecturer.id = lecturer_id
-                #print(lecturer)
+                # print(lecturer)
                 self.lecturers.append(lecturer)
 
         return self
@@ -109,4 +116,3 @@ class Course(BaseModel):
     def out_dict(self):
         return {"id": self.id.__str__(), "title": self.title, "abstract": self.abstract,
                 "lecturers": Lecturer.out(self.lecturers), "tags": Tag.out(self.tags)}
-
