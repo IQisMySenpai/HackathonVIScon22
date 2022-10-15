@@ -1,4 +1,8 @@
 from fastapi import Response
+from bson.objectid import ObjectId
+
+def find_all_id_query(objs):
+    return {'_id': {'$in': [obj.id for obj in objs]}}
 
 def pack_response(response: Response, status: int, message: str, data: dict = None):
     default = {"status": status, "msg": message}

@@ -15,13 +15,13 @@ def get_tags(response: Response):
 def post_tag(tag: Tag, response: Response):
     return create_tag(mongo, response, tag)
 
-@api.get("/lecturers")
-def read_lecturers(response: Response):
-    return list_lecturers(mongo, response)
+#@api.get("/lecturers")
+#def read_lecturers(response: Response):
+#    return list_lecturers(mongo, response)
 
 @api.get("/courses")
-def read_courses(response: Response):
-    return list_courses(mongo, response)
+def read_courses(response: Response, page: int = 0):
+    return list_courses(mongo, response, page)
 
 @api.post("/courses")
 def post_course(course: Course, response: Response):
