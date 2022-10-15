@@ -7,4 +7,7 @@ window.addEventListener('load', function() {
 
     course.addCourseTags([{'name': 'test', 'color':'red'}, {'name': 'test2', 'color':'blue'}]);
     course.addCourseRatings([{'name': 'Test', 'rating': 5}, {'name': 'Test2', 'rating': 3}]);
+
+    var review = new Review();
+    review.newReviewField([{'name': 'Test'}, {'name': 'Test2'}]);
 });
