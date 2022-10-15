@@ -28,11 +28,6 @@ html, body {
     font-family: "Roboto", Arial, Helvetica, sans-serif;
 }
 
-a {
-    text-decoration: none;
-    color: var(--mainFont);
-}
-
 .navBar {
     display: flex;
     background-color: var(--navbarBackground);
@@ -54,6 +49,8 @@ a {
 .navBarLink {
     display: block;
     flex: 0 0 max-content;
+    text-decoration: none;
+    color: var(--navbarColor);
 
     border-radius: 5px;
     padding: 0.5rem 1rem;
