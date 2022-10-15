@@ -1,8 +1,25 @@
-from fastapi import Response
+from fastapi import Response, Request
 from bson.objectid import ObjectId
 from mongo_api import *
 from api_common import *
 from structs import *
+import jwt
+import jwt.exceptions as jex
+
+# ======================================================================================================================
+# Globals
+# ======================================================================================================================
+
+key = (
+    b'-----BEGIN PUBLIC KEY-----\n'
+    b'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtP+L+6HuC6g/d6xJxjdS\n'
+    b'gTMYusm9HehmbfB/NKbjKPBVQ7ebnoMuvPDI8MMRsQS4/vx5bdkofxD1qresiCJu\n'
+    b'kBFZoZ25r7/WyPLv09VgaHiwevO+Ygy7pb2aySO9ByDrWTfwj2mN4N80GyNXJbH4\n'
+    b'52vYXNdETPmBpawEp5O4uRs08tqxMYq0C4mWSTnAWZazuijmfA0FXUi7juVUEqtq\n'
+    b'fJYGMWtj5nEOhjvv3u7uNpMPRjz/pk+Ffb+qQZ6PBymCx+jrBm1ThEtRAeSEauXl\n'
+    b'xHvsfsCEt8fAr1YUR9Xu/16VbA/phZ5gzSrv8D+wdFdEB4BqvI0PpR1TJHzvdD82\n'
+    b'JQIDAQAB\n'
+    b'-----END PUBLIC KEY-----\n')
 
 
 def list_tags(db: MongoAPI, response: Response):
@@ -65,3 +82,22 @@ def load_lecturer_for_courses(db: MongoAPI, courses: List[Course]):
             continue
         print(course.lecturers)
         course.lecturers = Lecturer.from_db(db.find("professors", find_all_id_query(course.lecturers), limit=10))
+
+
+def test_login(request: Request, response: Response):
+    id_token = request.headers.get("Authorization")
+    print(id_token)
+
+    if id_token is None:
+        return pack_response(response=response, status=401, message="Login required")
+
+    try:
+        user_info = jwt.decode(jwt=id_token, key=key, algorithms=["RS256"], options={"verify_aud": False}), False
+    except jex.InvalidSignatureError:
+        return pack_response(response=response, status=401, message="Invalid Authorisation, Login Again"), False
+    except jex.ExpiredSignatureError:
+        return pack_response(response=response, status=401, message="Expired Authorisation, Login Again"), False
+
+    return user_info, True
+
+
