@@ -35,8 +35,10 @@ class Tag(BaseModel):
 
     def db_dict(self):
         return {"name": self.name, "color": self.color}
+
     def out_dict(self):
         return {"id": self.id.__str__(), "name": self.name, "color": self.color}
+
 
 class Lecturer(BaseModel):
     id: Union[str, None] = None
