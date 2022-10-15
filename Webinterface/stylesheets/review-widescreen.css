@@ -1,0 +1,205 @@
+.reviews {
+    width: 70%;
+    padding: 1.5rem 3rem;
+    background-color: var(--section-background);
+    border: var(--section-border);
+    box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+    margin: 1rem 0;
+    border-radius: 1rem;
+}
+
+.newReviewContent {
+    display: flex;
+}
+
+.newReviewTexts {
+    flex: 1 0 75%;
+    display: flex;
+    flex-direction: column;
+}
+
+.newReviewTextArea, .newReviewPos, .newReviewNeg {
+    border: var(--section-border);
+    background-color: rgba(224, 255, 255, 0.1);
+    font-size: 0.8rem;
+    resize: none;
+    padding: 0.5rem;
+    height: 6rem;
+    border-radius: 5px;
+}
+
+.newReviewTextArea:focus, .newReviewPos:focus, .newReviewNeg:focus {
+    outline: none;
+}
+
+.newReviewPosVNegs {
+    margin: 0.5rem 0;
+    display: flex
+}
+
+.newReviewPos, .newReviewNeg {
+    flex: 0 1 50%;
+}
+
+.newReviewPos {
+    margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+.newReviewNeg {
+    margin: 0.5rem 0 0.5rem 0.5rem;
+}
+
+.newReviewRatings {
+    flex: 0 0 25%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 0 1rem;
+}
+
+.newReviewRating {
+    margin: 0 0 0.5rem 0;
+    display: flex;
+}
+
+.newReviewRatingHeader {
+    flex: 0 0;
+}
+
+.newReviewRatingStars {
+    flex: 1 0;
+    text-align: right;
+    position: relative;
+}
+
+.newReviewRatingStars input {
+    opacity: 0;
+    right: -0.25rem;
+    cursor: pointer;
+    position: absolute;
+    width: 6rem;
+}
+
+.oldReviews {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    padding: 1.5rem 3rem;
+    background-color: var(--section-background);
+    border: var(--section-border);
+    box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+    margin: 1rem 0;
+    border-radius: 1rem;
+}
+
+.reviewContent {
+    display: flex;
+}
+
+.reviewTexts {
+    flex: 1 0 75%;
+    display: flex;
+    flex-direction: column;
+}
+
+.reviewTextArea {
+
+}
+
+.reviewTextArea, .reviewPos, .reviewNeg {
+    border: var(--section-border);
+    font-size: 0.8rem;
+    resize: none;
+    padding: 0.5rem;
+    min-height: 6rem;
+    border-radius: 5px;
+    background-color: rgba(224, 255, 255, 0.1);
+}
+
+.reviewPosVNegs {
+    margin: 0.5rem 0;
+    display: flex
+}
+
+.reviewPos, .reviewNeg {
+    flex: 0 1 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.reviewPos {
+    margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+.reviewNeg {
+    margin: 0.5rem 0 0.5rem 0.5rem;
+}
+
+.reviewRatings {
+    flex: 0 0 25%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 0 1rem;
+}
+
+.reviewRating {
+    display: flex;
+    margin: 0 0 0.5rem 0;
+}
+
+.reviewRatingHeader {
+    flex: 0 0;
+}
+
+.reviewRatingStars {
+    flex: 1 0;
+    text-align: right;
+}
+
+.reviewUsername, .reviewDate, .reviewReport {
+    display: inline-block;
+    font-size: 14px;
+}
+
+.reviewReport {
+    color: rgba(220,20,60,1);
+    transition-duration: 0.2s;
+}
+
+.reviewReport:hover {
+    color: rgba(150,0,0,1);
+}
+
+.reviewHeader {
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.newReviewButtons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.newReviewButtons button {
+    margin: 0 0 0 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background-color: rgba(100, 149, 237, 1);
+    font-size: 1rem;
+    color: white;
+    border: 0 none;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+}
+
+.newReviewButtons button:hover {
+    background-color: rgba(100, 149, 237, 0.8);
+}
+
+.review {
+    margin: 0 0 2rem 0;
+}
+
+.review:last-child {
+    margin: 0;
+}
