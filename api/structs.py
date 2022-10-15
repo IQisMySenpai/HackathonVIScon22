@@ -2,10 +2,8 @@ import time
 from typing import Union, List
 from pydantic import BaseModel
 
-
 class User(BaseModel):
     preferred_username: str
-
 
 class Tag(BaseModel):
     id: Union[str, None] = None
@@ -22,6 +20,13 @@ class Tag(BaseModel):
             return None
         return [tag.out_dict() for tag in tags]
 
+    @staticmethod
+    def db_out(tags):
+        if tags is None:
+            return None
+        return [tag.db_dict() for tag in tags]
+
+
     def from_dict(self, d):
         self.id = d.get("_id")
         self.name = d.get("name")
@@ -30,10 +35,8 @@ class Tag(BaseModel):
 
     def db_dict(self):
         return {"name": self.name, "color": self.color}
-
     def out_dict(self):
         return {"id": self.id.__str__(), "name": self.name, "color": self.color}
-
 
 class Lecturer(BaseModel):
     id: Union[str, None] = None
@@ -94,7 +97,6 @@ class Review(BaseModel):
         return {"id": self.id.__str__(), "first_name": self.first_name, "last_name": self.last_name, "title": self.title, "department": self.department}
 
 
-
 class Course(BaseModel):
     id: Union[str, None] = None
     title: Union[str, None] = None
@@ -124,16 +126,16 @@ class Course(BaseModel):
             for lecturer_id in d["lecturer"]:
                 lecturer = Lecturer()
                 lecturer.id = lecturer_id
-                # print(lecturer)
+                #print(lecturer)
                 self.lecturers.append(lecturer)
 
         return self
 
     def db_dict(self):
-        return None
-        # return {"name": self.name, "addition": self.addition,
-        #       "lecturer": Lecturer.out(self.lecturers), "tags": Tag.out(self.tags)}
+         return {"_id": self.id,
+               "lecturer": Lecturer.out(self.lecturers), "tags": Tag.db_out(self.tags)}
 
     def out_dict(self):
         return {"id": self.id.__str__(), "title": self.title, "abstract": self.abstract,
                 "lecturers": Lecturer.out(self.lecturers), "tags": Tag.out(self.tags)}
+
