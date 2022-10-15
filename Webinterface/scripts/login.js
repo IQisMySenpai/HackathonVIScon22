@@ -2,7 +2,7 @@ window.addEventListener('load', function() {
     let params = getParameters();
 
     if (params['id_token'] !== undefined) {
-        document.cookie = "id_token=" + params['id_token'];
+        document.cookie = 'id_token=' + params['id_token'] + '; path=/';
         history.pushState("", document.title, window.location.pathname);
     }
     let cookies = getCookies();
@@ -12,7 +12,7 @@ window.addEventListener('load', function() {
         button.html('Logout');
         button.on('click', function() {
             button.off('click');
-            document.cookie = 'id_token=;expires=Thu, 01 Jan 1970';
+            document.cookie = 'id_token=; expires=Thu, 01 Jan 1970; path=/';
             window.setTimeout(loginButton, 100);
         });
     } else {
