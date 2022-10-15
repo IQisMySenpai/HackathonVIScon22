@@ -44,18 +44,18 @@ function search () {
         tags.push($(this).attr('data-name'));
     });
 
-    /*$.ajax({
-        url: '/api/courses',
+    $.ajax({
+        url: '/api/query/courses',
         method: 'GET',
         data: {
-            tags: tags,
-            search: $('.search').val()
+            tags: tags.toString(),
+            query: $('.search').val()
         },
         success: function(data) {
-
+            console.log(data);
         },
         error: function(data) {
             alert('Error while running search:\n\n' + data.responseText);
         }
-    });*/
+    });
 }
