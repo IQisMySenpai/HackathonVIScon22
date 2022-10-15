@@ -71,7 +71,28 @@ class Review(BaseModel):
     rating: Union[int, None] = None
     pos: Union[int, None] = None
     neg: Union[int, None] = None
-    test: Union[str, None] = None
+
+    @staticmethod
+    def from_db(profs):
+        return [Lecturer().from_dict(d) for d in profs]
+
+    @staticmethod
+    def out(profs):
+        if profs is None:
+            return []
+        return [prof.out_dict() for prof in profs]
+
+    def from_dict(self, d):
+        self.id = d.get("_id")
+        self.first_name = d.get("first_name")
+        self.last_name = d.get("last_name")
+        self.department = d.get("department")
+        self.title = d.get("title")
+        return self
+
+    def out_dict(self):
+        return {"id": self.id.__str__(), "first_name": self.first_name, "last_name": self.last_name, "title": self.title, "department": self.department}
+
 
 
 class Course(BaseModel):
@@ -91,7 +112,7 @@ class Course(BaseModel):
         return [course.out_dict() for course in courses]
 
     def from_dict(self, d):
-        self.id = d["_id"]
+        self.id = d.get("_id")
         self.title = d.get("title")
         self.abstract = d.get("abstract")
 

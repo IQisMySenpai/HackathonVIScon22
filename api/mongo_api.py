@@ -17,6 +17,9 @@ class MongoAPI:
 
         self.db_name = db_name
 
+    def collection(self, collection: str):
+        return self.client[self.db_name][collection]
+
     def find_one(self, collection: str, filter_dict: dict = None, projection_dict: dict = None, sort: list = None):
         """
         Query the database.
