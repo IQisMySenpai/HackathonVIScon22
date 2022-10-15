@@ -28,9 +28,7 @@ def list_lecturers(db: MongoAPI, response: Response):
 
     return pack_response(response, 200, "ok", {"lecturers": Lecturer.out(Lecturer.from_db(profs))})
 
-def list_courses(db: MongoAPI, response: Response, page):
-    courses = db.find("courses", skip= 20 * page, limit=20)
-
+def load_courses_helper(courses, db: MongoAPI, response: Response):
     if len(courses) == 0:
         return pack_response(response, 204, "No courses found.")
 
@@ -38,6 +36,31 @@ def list_courses(db: MongoAPI, response: Response, page):
     load_lecturer_for_courses(db, courses)
 
     return pack_response(response, 200, "ok", {"courses": Course.out(courses)})
+def list_courses(db: MongoAPI, response: Response, page):
+    courses = db.find("courses", skip= 20 * page, limit=20)
+    return load_courses_helper(courses, db, response)
+
+def query_courses(db: MongoAPI, response: Response, query, page):
+    regex = ".*" + query + ".*"
+    regex = regex.replace(" ", ".*")
+    courses = list(db.collection("courses").find({"title": {"$regex": regex, '$options': 'i'}}))
+    """
+    courses = list(db.collection("courses").aggregate([
+        {
+            '$search': {
+                'text': {"query": query, "path": "title", "fuzzy": {}}
+             }
+        },
+        {
+            "$project": {
+                "_id": 0,
+                "title": 1,
+                "score": {"$meta": "searchScore"}
+            }
+        }
+    ]))
+    """
+    return load_courses_helper(courses, db, response)
 
 def create_course(db: MongoAPI, response: Response, course: Course):
 

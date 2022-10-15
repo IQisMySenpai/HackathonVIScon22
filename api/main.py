@@ -23,6 +23,10 @@ def post_tag(tag: Tag, response: Response):
 def read_courses(response: Response, page: int = 0):
     return list_courses(mongo, response, page)
 
+@api.get("/query/courses")
+def read_courses(query: str, response: Response, page: int = 0):
+    return query_courses(mongo, response, query, page)
+
 @api.post("/courses")
 def post_course(course: Course, response: Response):
     return create_course(mongo, response, course)
