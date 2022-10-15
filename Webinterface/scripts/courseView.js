@@ -9,5 +9,7 @@ window.addEventListener('load', function() {
     course.addCourseRatings([{'name': 'Test', 'rating': 5}, {'name': 'Test2', 'rating': 3}]);
 
     var review = new Review();
-    review.newReviewField([{'name': 'Test'}, {'name': 'Test2'}]);
+    review.newReviewField([{'name': 'Test'}, {'name': 'Test2'}, {'name': 'Test3'}]);
+    review.oldReviews();
+    review.addOldReview('Ueli', '15.10.2022', [{'name': 'Test', 'rating': 5}, {'name': 'Test2', 'rating': 3}], 'This is a cool course', ['He likes Turtles', 'Cookies are good'], ['This Course is shit']);
 });

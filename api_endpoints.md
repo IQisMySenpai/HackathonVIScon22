@@ -49,7 +49,7 @@
 - `number` - The number of reviews to get
 - `offset` - The offset of the reviews to get
 - `sort` - The sort of the reviews to get
-   - `newest` - Newest reviews first
+   - `newest` - Newest reviews first (default)
    - `oldest` - Oldest reviews first
    - `highest` - Highest rated reviews first
    - `lowest` - Lowest rated reviews first
