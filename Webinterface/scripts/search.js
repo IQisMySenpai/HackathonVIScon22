@@ -37,3 +37,25 @@ function createTags (tags) {
         $('.tags').append('<div class="tag" data-name="' + tags[i]['name'] + '" style="background-color: ' + tags[i]['color'] + '">' + tags[i]['name'] + '</div>');
     }
 }
+
+function search () {
+    let tags = [];
+    $('.searchTags .tag').each(function() {
+        tags.push($(this).attr('data-name'));
+    });
+
+    /*$.ajax({
+        url: '/api/courses',
+        method: 'GET',
+        data: {
+            tags: tags,
+            search: $('.search').val()
+        },
+        success: function(data) {
+
+        },
+        error: function(data) {
+            alert('Error while running search:\n\n' + data.responseText);
+        }
+    });*/
+}
