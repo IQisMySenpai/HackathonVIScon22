@@ -39,24 +39,18 @@ function createTags (tags) {
 }
 
 function search () {
-    console.log('search');
     let tags = [];
     $('.searchTags .tag').each(function() {
         tags.push($(this).attr('data-name'));
     });
 
-    $.ajax({
-        url: '/api/query/courses',
-        method: 'GET',
-        data: {
-            tags: tags.toString(),
-            query: $('.search').val()
-        },
-        success: function(data) {
-            console.log(data);
-        },
-        error: function(data) {
-            alert('Error while running search:\n\n' + data.responseText);
-        }
-    });
+    let tagString = tags.toString();
+    let query = $('.search').val()
+
+    let url = '/search?query=' + query;
+    if (tagString.length > 5) {
+        url += '&tags=' + tagString;
+    }
+
+    window.location.href = url;
 }

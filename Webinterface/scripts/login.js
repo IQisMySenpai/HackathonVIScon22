@@ -1,5 +1,5 @@
 window.addEventListener('load', function() {
-    let params = getParameters();
+    let params = getParameters('hash');
 
     if (params['id_token'] !== undefined) {
         document.cookie = 'id_token=' + params['id_token'] + '; path=/';
@@ -37,15 +37,17 @@ function randstring(length) {
     return result;
 }
 
-function getParameters()
-{
+function getParameters(type = 'search') {
     let url;
-    if (window.location.hash !== '') {
-        url = window.location.hash.substring(1);
-    } else if (window.location.search !== '') {
-        url = window.location.search.substring(1);
-    } else {
-        return {};
+    switch (type) {
+        case 'search':
+            url = window.location.search.substring(1);
+            break;
+        case 'hash':
+            url = window.location.hash.substring(1);
+            break;
+        default:
+            return {};
     }
 
     let params = url.split('&');
@@ -72,8 +74,4 @@ function getCookies() {
         cookies[split[0]] = split[1];
     }
     return cookies;
-}
-
-function version () {
-    return '1.0.0';
 }
