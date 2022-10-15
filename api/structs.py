@@ -99,11 +99,18 @@ class Review(BaseModel):
 
 class Course(BaseModel):
     id: Union[str, None] = None
+    segments: Union[list, None] = None
+    readable_id: Union[str, None] = None
     title: Union[str, None] = None
-    abstract: Union[str, None] = None
-    ratings: Union[int, None] = None
-    tags: Union[List[Tag], None] = None
+    course_type: Union[str, None] = None
+    ects: Union[str, None] = None
+    hours: Union[str, None] = None
     lecturers: Union[List[Lecturer], None] = None
+    abstract: Union[str, None] = None
+    objective: Union[str, None] = None
+    content: Union[str, None] = None
+    tags: Union[List[Tag], None] = None
+    ratings: Union[int, None] = None
 
     @staticmethod
     def from_db(courses):
@@ -117,6 +124,15 @@ class Course(BaseModel):
         self.id = d.get("_id")
         self.title = d.get("title")
         self.abstract = d.get("abstract")
+
+        self.segments = d.get("segments")
+        self.readable_id = d.get("readable_id")
+        self.course_type = d.get("course_type")
+        self.ects = d.get("ects")
+        self.hours = d.get("hours")
+        self.objective = d.get("objective")
+        self.content = d.get("content")
+        self.ratings = d.get("ratings")
 
         if "tags" in d:
             self.tags = Tag.from_db(d["tags"])
@@ -139,3 +155,19 @@ class Course(BaseModel):
         return {"id": self.id.__str__(), "title": self.title, "abstract": self.abstract,
                 "lecturers": Lecturer.out(self.lecturers), "tags": Tag.out(self.tags)}
 
+    def full_dict(self):
+        return {"_id": self.id,
+               "lecturer": Lecturer.out(self.lecturers),
+                "tags": Tag.db_out(self.tags),
+                "segments": self.segments,
+                "readable_id": self.readable_id,
+                "title": self.title,
+                "course_type": self.course_type,
+                "ects": self.ects,
+                "hours": self.hours,
+                "abstract": self.abstract,
+                "objective": self.objective,
+                "content": self.content,
+                "ratings": self.ratings
+
+        }
