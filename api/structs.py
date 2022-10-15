@@ -20,6 +20,13 @@ class Tag(BaseModel):
             return None
         return [tag.out_dict() for tag in tags]
 
+    @staticmethod
+    def db_out(tags):
+        if tags is None:
+            return None
+        return [tag.db_dict() for tag in tags]
+
+
     def from_dict(self, d):
         self.id = d.get("_id")
         self.name = d.get("name")
@@ -27,7 +34,7 @@ class Tag(BaseModel):
         return self
 
     def db_dict(self):
-        return {"name": self.name, "color": self.color}
+        return {"_id": self.id, "name": self.name, "color": self.color}
     def out_dict(self):
         return {"id": self.id.__str__(), "name": self.name, "color": self.color}
 
@@ -123,9 +130,8 @@ class Course(BaseModel):
         return self
 
     def db_dict(self):
-        return None
-        # return {"name": self.name, "addition": self.addition,
-        #       "lecturer": Lecturer.out(self.lecturers), "tags": Tag.out(self.tags)}
+         return {"_id": self.id,
+               "lecturer": Lecturer.out(self.lecturers), "tags": Tag.db_out(self.tags)}
 
     def out_dict(self):
         return {"id": self.id.__str__(), "title": self.title, "abstract": self.abstract,
