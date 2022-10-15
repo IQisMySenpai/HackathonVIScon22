@@ -1,12 +1,11 @@
 window.addEventListener('load', function() {
     let params = getParameters();
-    let cookies = getCookies();
 
     if (params['id_token'] !== undefined) {
         document.cookie = "id_token=" + params['id_token'];
         history.pushState("", document.title, window.location.pathname);
     }
-
+    let cookies = getCookies();
     if (cookies['id_token'] !== '' && cookies['id_token'] !== undefined) {
         let button = $('.login').find('.navBarLink');
 
