@@ -53,8 +53,8 @@ window.addEventListener('load', function() {
         success: function(data) {
             courseSearch.addCourses(data['courses']);
         },
-        error: function(data) {
-            alert('Error while running tags:\n\n' + data.responseText);
+        error: function(data, textStatus, xhr) {
+            alert('Error [' + xhr.status + '] while running search:\n\n' + data.responseText);
         }
     });
 });
