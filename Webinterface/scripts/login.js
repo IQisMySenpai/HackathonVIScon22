@@ -12,7 +12,8 @@ window.addEventListener('load', function() {
         button.html('Logout');
         button.on('click', function() {
             document.cookie = 'id_token=;expires=Thu, 01 Jan 1970';
-            loginButton();
+            window.setTimeout(loginButton, 100);
+
         });
     } else {
         loginButton();
