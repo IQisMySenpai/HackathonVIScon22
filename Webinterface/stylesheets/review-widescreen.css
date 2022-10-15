@@ -13,7 +13,7 @@
 }
 
 .newReviewTexts {
-    flex: 1 0 80%;
+    flex: 1 0 75%;
     display: flex;
     flex-direction: column;
 }
@@ -50,7 +50,7 @@
 }
 
 .newReviewRatings {
-    flex: 0 0 20%;
+    flex: 0 0 25%;
     display: flex;
     flex-direction: column;
     margin: 0 0 0 1rem;
@@ -96,7 +96,7 @@
 }
 
 .reviewTexts {
-    flex: 1 0 80%;
+    flex: 1 0 75%;
     display: flex;
     flex-direction: column;
 }
@@ -135,7 +135,7 @@
 }
 
 .reviewRatings {
-    flex: 0 0 20%;
+    flex: 0 0 25%;
     display: flex;
     flex-direction: column;
     margin: 0 0 0 1rem;
