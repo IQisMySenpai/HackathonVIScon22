@@ -49,6 +49,8 @@ html, body {
 .navBarLink {
     display: block;
     flex: 0 0 max-content;
+    text-decoration: none;
+    color: var(--navbarColor);
 
     border-radius: 5px;
     padding: 0.5rem 1rem;
