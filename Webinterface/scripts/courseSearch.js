@@ -24,8 +24,11 @@ class CourseSearch {
     }
 
     addCourses(courses) {
+        if (courses.length === 0) {
+            this._courseView.append('Seems like only you and me are wanting to take this course...');
+        }
         for (let i = 0; i < courses.length; i++) {
-            this.addCourse(courses[i]['id'], courses[i]['name'], courses[i]['addition'], courses[i]['description']);
+            this.addCourse(courses[i]['id'], courses[i]['title'], courses[i]['readable_id'], courses[i]['abstract']);
         }
     }
 }
@@ -33,5 +36,25 @@ class CourseSearch {
 window.addEventListener('load', function() {
     var courseSearch = new CourseSearch();
 
-    courseSearch.addCourse('1', 'Diskrete Mathematik', '252-0025-01L', 'Inhalt: Mathematisches Denken und Beweise, Abstraktion. Mengen, Relationen (z.B. Aequivalenz- und Ordnungsrelationen), Funktionen, (Un-)abzählbarkeit, Zahlentheorie, Algebra (Gruppen, Ringe, Körper, Polynome, Unteralgebren, Morphismen), Logik (Aussagen- und Prädikatenlogik, Beweiskalküle).<br><br>Hauptziele der Vorlesung sind (1) die Einführung der wichtigsten Grundbegriffe der diskreten Mathematik, (2) das Verständnis der Rolle von Abstraktion und von Beweisen und (3) die Diskussion einiger Anwendungen, z.B. aus der Kryptographie, Codierungstheorie und Algorithmentheorie.');
+    let params = getParameters('search');
+
+    let data = {
+        query: params['query']
+    };
+
+    if (params['tags'] !== undefined) {
+        data['tags'] = params['tags'];
+    }
+
+    $.ajax({
+        url: '/api/query/courses',
+        method: 'GET',
+        data: data,
+        success: function(data) {
+            courseSearch.addCourses(data['courses']);
+        },
+        error: function(data) {
+            alert('Error while running tags:\n\n' + data.responseText);
+        }
+    });
 });
