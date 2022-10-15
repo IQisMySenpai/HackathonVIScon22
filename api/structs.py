@@ -1,27 +1,107 @@
-class Course:
-    id: str
-    name: str
-    addition: str
-    tags: list
+import time
+from typing import Union
+from pydantic import BaseModel
+
+class User(BaseModel):
+    preferred_username: str
+
+class Tag(BaseModel):
+    id: Union[str, None] = None
+    name: Union[str, None] = None
+    color: Union[str, None] = None
+
+    @staticmethod
+    def from_db(tags):
+        return [Tag().from_dict(d) for d in tags]
+
+    @staticmethod
+    def out(tags):
+        if tags is None:
+            return None
+        return [tag.out_dict() for tag in tags]
+
+    def from_dict(self, d):
+        self.id = d.get("_id")
+        self.name = d.get("name")
+        self.color = d.get("color")
+        return self
+
+    def db_dict(self):
+        return {"name": self.name, "color": self.color}
+    def out_dict(self):
+        return {"id": self.id.__str__(), "name": self.name, "color": self.color}
+
+class Lecturer(BaseModel):
+    id: Union[str, None] = None
+    first_name: Union[str, None] = None
+    last_name: Union[str, None] = None
+    title: Union[str, None] = None
+    department: Union[str, None] = None
+
+    @staticmethod
+    def from_db(profs):
+        return [Lecturer().from_dict(d) for d in profs]
+
+    @staticmethod
+    def out(profs):
+        if profs is None:
+            return []
+        return [prof.out_dict() for prof in profs]
+
+    def from_dict(self, d):
+        self.id = d.get("_id")
+        self.first_name = d.get("first_name")
+        self.last_name = d.get("last_name")
+        self.department = d.get("department")
+        self.title = d.get("title")
+        return self
+
+    def out_dict(self):
+        return {"id": self.id.__str__(), "first_name": self.first_name, "last_name": self.last_name, "title": self.title, "department": self.department}
+
+class Review(BaseModel):
+    id: Union[str, None] = None
+    date: Union[int, None] = None
+    rating: Union[int, None] = None
+    pos: Union[int, None] = None
+    neg: Union[int, None] = None
+    test: Union[str, None] = None
+
+class Course(BaseModel):
+    id: Union[str, None] = None
+    name: Union[str, None] = None
+    addition: Union[str, None] = None
+    summary: Union[str, None] = None
+    ratings: Union[int, None] = None
+    tags: Union[list[Tag], None] = None
+    lecturers: Union[list[Lecturer], None] = None
 
     @staticmethod
     def from_db(courses):
-        return [Course(d) for d in courses]
+        return [Course().from_dict(d) for d in courses]
 
     @staticmethod
     def out(courses):
         return [course.out_dict() for course in courses]
 
-    def __init__(self, d=None):
-        if d is not None:
-            self.from_dict(d)
-
     def from_dict(self, d):
         self.id = d["_id"]
-        self.name = d["name"]
-        self.addition = d["addition"]
-        self.tags = d["tags"]
+        self.name = d.get("name")
+        self.addition = d.get("addition")
+
+        if "tags" in d:
+            self.tags = Tag.from_db(d["tags"])
+
+        if "lecturers" in d:
+            self.lecturers = [Lecturer().from_db(l) for l in d["lecturers"]]
+
+        return self
+
+    def db_dict(self):
+        return {"name": self.name, "addition": self.addition,
+                "lecturers": Lecturer.out(self.lecturers), "tags": Tag.out(self.tags)}
 
     def out_dict(self):
-        return {"id": self.id.__str__(), "name": self.name, "addition": self.addition, "tags": self.tags}
+        return {"id": self.id.__str__(), "name": self.name, "addition": self.addition,
+                "lecturers": Lecturer.out(self.lecturers), "tags": Tag.out(self.tags)}
 
