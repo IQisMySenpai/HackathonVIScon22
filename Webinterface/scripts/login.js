@@ -2,15 +2,19 @@ window.addEventListener('load', function() {
     let params = getParameters();
     let cookies = getCookies();
 
+    if (params['id_token'] !== undefined) {
+        document.cookie = "id_token=" + params['id_token'];
+        history.pushState("", document.title, window.location.pathname);
+    }
+
     if (cookies['id_token'] !== '' && cookies['id_token'] !== undefined) {
         let button = $('.login').find('.navBarLink');
 
         button.html('Logout');
         button.on('click', function() {
             document.cookie = 'id_token=;expires=Thu, 01 Jan 1970';
+            loginButton();
         });
-    } else if (params['id_token'] !== undefined) {
-        document.cookie = "id_token=" + params['id_token'];
     } else {
         loginButton();
     }
