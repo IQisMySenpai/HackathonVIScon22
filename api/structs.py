@@ -1,5 +1,5 @@
 import time
-from typing import Union
+from typing import Union, List
 from pydantic import BaseModel
 
 class User(BaseModel):
@@ -34,7 +34,7 @@ class Tag(BaseModel):
         return self
 
     def db_dict(self):
-        return {"_id": self.id, "name": self.name, "color": self.color}
+        return {"name": self.name, "color": self.color}
     def out_dict(self):
         return {"id": self.id.__str__(), "name": self.name, "color": self.color}
 
@@ -64,7 +64,9 @@ class Lecturer(BaseModel):
         return self
 
     def out_dict(self):
-        return {"id": self.id.__str__(), "first_name": self.first_name, "last_name": self.last_name, "title": self.title, "department": self.department}
+        return {"id": self.id.__str__(), "first_name": self.first_name, "last_name": self.last_name,
+                "title": self.title, "department": self.department}
+
 
 class Review(BaseModel):
     id: Union[str, None] = None
@@ -100,8 +102,8 @@ class Course(BaseModel):
     title: Union[str, None] = None
     abstract: Union[str, None] = None
     ratings: Union[int, None] = None
-    tags: Union[list[Tag], None] = None
-    lecturers: Union[list[Lecturer], None] = None
+    tags: Union[List[Tag], None] = None
+    lecturers: Union[List[Lecturer], None] = None
 
     @staticmethod
     def from_db(courses):
