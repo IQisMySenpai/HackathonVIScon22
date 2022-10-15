@@ -5,9 +5,13 @@ from courses import *
 from db import mongo
 
 app = FastAPI()
+api = FastAPI()
 
-# app.mount("/", StaticFiles(directory="../Webinterface", html=True), name="WebInterface")
 
-@app.get("/api/courses")
+
+@api.get("/courses")
 def read_item():
     return get_courses(mongo)
+
+app.mount("/api", api)
+app.mount("/", StaticFiles(directory="../Webinterface", html=True), name="WebInterface")
