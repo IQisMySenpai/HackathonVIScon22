@@ -20,10 +20,11 @@ window.addEventListener('load', function() {
             course.setCourseDescription(desc);
 
             course.addCourseTags(lecture[0]['tags']);
-            let ratings = lecture[0]['reviews'][0]['ratings'];
+            let reviews = lecture[0]['reviews'];
+            let ratings;// = lecture[0]['reviews'][0]['ratings'];
 
             if (ratings == null || ratings.length === 0) {
-                ratings = [{'name': 'Difficulty', 'rating': 0}, {'name': 'Workload', 'rating': 0}, {'name': 'Jokes', 'rating': 0}];
+                ratings = [{'name': 'Difficulty', 'rating': Math.floor(Math.random() * 11);}, {'name': 'Workload', 'rating': Math.floor(Math.random() * 11);}, {'name': 'Jokes', 'rating': Math.floor(Math.random() * 11);}];
             }
 
             course.addCourseRatings(ratings);
