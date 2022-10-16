@@ -226,7 +226,7 @@ function postReview () {
         tags.push(tagElement.data('id'));
     }
 
-    let id = $('.reviewHeader').attr('id');
+    let id = $('.courseHeader').attr('id');
 
     let data = {
         course_id: id,
