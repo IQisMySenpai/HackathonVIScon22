@@ -137,7 +137,7 @@ class Review(BaseModel):
         return self
 
     def db_dict(self):
-        return {"m_id": self.m_id, "text": self.text, "date": self.date,
+        return {"_id": self.m_id, "text": self.text, "date": self.date,
                 "neg": self.neg, "pos": self.pos, "author": self.author, "ratings": Rating.db_out(self.rating), "is_reported": self.is_reported}
 
     def out_dict(self):

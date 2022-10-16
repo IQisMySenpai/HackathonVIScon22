@@ -70,11 +70,6 @@ def list_courses(db: MongoAPI, response: Response, course_id: ObjectId, page: in
 
 def query_courses(db: MongoAPI, response: Response, query: str, tags: List[str] = None, page: int = 0):
 
-    # name
-    # mongo id
-    # readable-id
-    # description
-
     regex = None
     if query is not None:
         regex = ".*" + query + ".*"
@@ -123,6 +118,21 @@ def create_review(db: MongoAPI, response: Response, review: Review):
         return pack_response(response, 400, "No course has been updated")
     return pack_response(response, 200, "ok")
 
+def flag_review(db: MongoAPI, response: Response, course_id: ObjectId, review_id: ObjectId):
+
+    # TODO check is moderator
+    username = "mod"
+    result = db.find_one("moderators", {'username': username})
+
+    if result is None:
+        return pack_response(response, 403, "forbidden?")
+
+    count = db.update("courses", {"_id": course_id, "reviews._id": review_id}, {"$set": {'reviews.$.is_reported': True}})
+
+    if count == 0:
+        return pack_response(response, 400, "no review updated")
+
+    return pack_response(response, 200, "ok")
 
 def load_lecturer_for_courses(db: MongoAPI, courses: List[Course]):
     for course in courses:

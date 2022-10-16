@@ -60,6 +60,17 @@ def post_review(review: Review, response: Response):
             return pack_response(response, 400, "Invalid course id")
 
     return create_review(mongo, response, review)
+@api.post("/courses/review/report")
+def post_report_review(course_id:str, review_id: str, response: Response):
+
+    try:
+        course_id = bson.objectid.ObjectId(course_id)
+        review_id = bson.objectid.ObjectId(review_id)
+    except (bson.errors.InvalidId, ValueError):
+        return pack_response(response, 400, "invalid id")
+
+    return flag_review(mongo, response, course_id, review_id)
+
 
 @api.post("/courses")
 def post_course(course: Course, response: Response):
