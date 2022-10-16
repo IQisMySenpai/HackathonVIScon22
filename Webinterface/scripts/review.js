@@ -274,7 +274,8 @@ function postReview () {
 
 function report (element) {
     let id = $('.courseHeader').attr('id');
-    let reviewId = $(element).closest('.review').attr('id');
+    let review = $(element).closest('.review');
+    let reviewId = review.attr('id');
     let cookie = getCookies()['id_token'];
 
     if (cookie === undefined || cookie === null || cookie === '') {
@@ -294,6 +295,7 @@ function report (element) {
         },
         success: function(data) {
             alert('Course Reported');
+            review.remove();
         },
         error: function(data) {
             alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
