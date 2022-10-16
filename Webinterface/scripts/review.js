@@ -16,7 +16,7 @@ class Review {
             url: '/api/tags',
             method: 'GET',
             success: function(data) {
-                ref._tags = this.data['tags'];
+                ref._tags = data['tags'];
                 ref.newReviewField([{'name': 'Difficulty'}, {'name': 'Workload'}, {'name': 'Jokes'}]);
 
                 ref.oldReviews();
@@ -24,7 +24,7 @@ class Review {
                 /*$.ajax({
                     url: '/api/reviews',
                     data: {
-                        'id': ref._id
+                        'course_id': ref._id
                     },
                     method: 'GET',
                     success: function(data) {
