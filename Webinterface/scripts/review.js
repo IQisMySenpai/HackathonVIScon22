@@ -9,35 +9,6 @@ class Review {
         this._id = id;
         this._review = $('<div class="reviews"></div>');
         $('main').append(this._review);
-
-
-        /*$.ajax({
-            url: '/api/tags',
-            method: 'GET',
-            success: function(data) {
-                ref._tags = data['tags'];
-                ref.newReviewField([{'name': 'Difficulty'}, {'name': 'Workload'}, {'name': 'Jokes'}]);
-
-                ref.oldReviews();
-
-                $.ajax({
-                    url: '/api/reviews',
-                    data: {
-                        'course_id': ref._id
-                    },
-                    method: 'GET',
-                    success: function(data) {
-                        ref.addOldReviews(this.data['reviews']);
-                    },
-                    error: function(data) {
-                        alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
-                    }
-                });
-            },
-            error: function(data) {
-                alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
-            }
-        });*/
     }
 
     newReviewField(ratings) {
@@ -120,7 +91,8 @@ class Review {
         html += '<div class="reviewInfo"><div class="reviewUsername">';
         html += username;
         html += '</div> - <div class="reviewDate">';
-        html += date;
+        let dateObj = new Date(date);
+        html += date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
         html += '</div> <div class="reviewReport">- Report</div></div>';
 
         this._oldReviews.append(html);
