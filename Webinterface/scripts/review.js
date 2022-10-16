@@ -226,7 +226,10 @@ function postReview () {
         tags.push(tagElement.data('id'));
     }
 
+    let id = $('.courseHeader').attr('id');
+
     let data = {
+        course_id: id,
         text: text,
         pos: pos,
         neg: neg,
@@ -246,7 +249,10 @@ function postReview () {
     $.ajax({
         url: '/api/courses/review',
         method: 'POST',
-        data: data,
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        processData: false,
         headers: {
             'Authorization': cookie || ''
         },
