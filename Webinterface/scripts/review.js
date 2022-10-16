@@ -92,7 +92,7 @@ class Review {
         html += username;
         html += '</div> - <div class="reviewDate">';
         let dateObj = new Date(date);
-        html += date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
+        html += '' + date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
         html += '</div> <div class="reviewReport">- Report</div></div>';
 
         this._oldReviews.append(html);
