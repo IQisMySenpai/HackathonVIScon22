@@ -21,10 +21,10 @@ class Review {
 
                 ref.oldReviews();
 
-                /*$.ajax({
+                $.ajax({
                     url: '/api/reviews',
                     data: {
-                        'id': ref._id
+                        'course_id': ref._id
                     },
                     method: 'GET',
                     success: function(data) {
@@ -33,7 +33,7 @@ class Review {
                     error: function(data) {
                         alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
                     }
-                });*/
+                });
             },
             error: function(data) {
                 alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);

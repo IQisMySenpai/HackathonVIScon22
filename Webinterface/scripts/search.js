@@ -27,7 +27,7 @@ window.addEventListener('load', function() {
             createTags(data['tags']);
         },
         error: function(data) {
-            alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
+            alert('Error [' + xhr.status + '] while running getting Tags:\n\n' + data.responseText);
         }
     });
 });
