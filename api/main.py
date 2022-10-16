@@ -60,9 +60,7 @@ def post_review(review: Review, request: Request, response: Response):
             return pack_response(response, 400, "Invalid course id")
 
     return create_review(mongo, request, response, review)
-
-
-@api.post("/courses/review/report")
+@api.get("/courses/review/report")
 def post_report_review(course_id:str, review_id: str, request: Request, response: Response):
 
     try:

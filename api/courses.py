@@ -173,6 +173,30 @@ def filter_reported_reviews(courses: List[Course]):
         if course.reviews is None:
             continue
         course.reviews = [review for review in course.reviews if not review.is_reported]
+
+def calculate_average_rating(courses: List[Course]):
+    ratings = []
+    for course in courses:
+        if course.reviews is None:
+            continue
+        avg = {}
+        for review in course.reviews:
+            if review.rating is None:
+                continue
+            for rating in review.rating:
+                if rating.name not in avg:
+                    avg[rating.name] = [rating.rating, 1]
+                else:
+                    avg[rating.name][0] += rating.rating
+                    avg[rating.name][1] += 1
+
+        result = []
+        for k in avg.keys():
+            result.append(avg[k][0] / avg[k][1])
+
+        ratings.append(result)
+    return ratings
+
 def load_lecturer_for_courses(db: MongoAPI, courses: List[Course]):
     for course in courses:
         if course.lecturers is None:
@@ -206,19 +230,19 @@ def get_lecturer_image(response: Response, vvz_id: int):
     svg = os.path.join(folder, f"{vvz_id}.svg")
 
     if os.path.exists(jpg):
-        return pack_response(response, 200, "Success", {"path": jpg})
+        return pack_response(response, 200, "Success", {"path": os.path.join("test_images", os.path.basename(jpg))})
 
     if os.path.exists(jpeg):
-        return pack_response(response, 200, "Success", {"path": jpeg})
+        return pack_response(response, 200, "Success", {"path": os.path.join("test_images", os.path.basename(jpeg))})
 
     if os.path.exists(png):
-        return pack_response(response, 200, "Success", {"path": png})
+        return pack_response(response, 200, "Success", {"path": os.path.join("test_images", os.path.basename(png))})
 
     if os.path.exists(gif):
-        return pack_response(response, 200, "Success", {"path": gif})
+        return pack_response(response, 200, "Success", {"path": os.path.join("test_images", os.path.basename(gif))})
 
     if os.path.exists(svg):
-        return pack_response(response, 200, "Success", {"path": svg})
+        return pack_response(response, 200, "Success", {"path": os.path.join("test_images", os.path.basename(svg))})
 
     return pack_response(response, 404, "No Image found", {})
 
