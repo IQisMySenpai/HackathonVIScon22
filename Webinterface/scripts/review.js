@@ -285,7 +285,7 @@ function report (element) {
 
     $.ajax({
         url: '/api/courses/review/report',
-        method: 'POST',
+        method: 'GET',
         data: {
             course_id: id,
             review_id: reviewId
