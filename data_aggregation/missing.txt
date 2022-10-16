@@ -1,0 +1,342 @@
+Thomas Michael Wohlgemuth 10021587
+Wendelin Werner 10033701
+Florentin Constancias 10067910
+Fabiano Orelli 10071726
+Manu Kapur 10048351
+Roy Smith 10032878
+Niao He 10072379
+Nicolas Gruber 10020099
+Emmanuel Kowalski 10025958
+Florian Dörfler 10038166
+Martin Schweizer 10009315
+David Rosenthal 10019837
+Laura Kobel-Keller 10049120
+Frederic Evers 10055088
+Stephan Pfister 10033997
+Martin Vogt 10092426
+Joachim M. Buhmann 10009696
+Menna Elassady 10083967
+Peter Andreas Kast 10004138
+Francesca Da Lio 10023206
+David N. Bresch 10030919
+Daniela Domeisen 10053620
+Sebastian Schemm 10068754
+Paul Tackley 10014878
+Benjamin Sudakov 10034016
+Meike Akveld 10021166
+Ariel Livio Bergamini 10030121
+Lothar Thiele 10003252
+Andrea Censi 10053401
+Jonathan Lorand 10075968
+Bernd Gärtner 10003905
+Angelika Steger 10005150
+David Steurer 10054440
+Emo Welzl 10003649
+Lukas Meier 10032644
+Benedikt Soja 10069210
+Milica Topalovic 10032719
+Gunnar Rätsch 10045219
+Julia Vogt 10062146
+Maarten Delbeke 10051242
+Peter Kiefer 10033567
+Carsten Schubert 10016097
+Christina Spengler 10003791
+Nitin Bathla 10079046
+Joseph Renes 10035398
+Jean-Claude Besse 10090810
+Thomas Hofmann 10023860
+Oscar Castañeda Fernández 10054599
+Sandra Andraszewicz 10049894
+Marc Pollefeys 10023269
+Olga Sorkine Hornung 10032203
+Siyu Tang 10064018
+Marc Alexander Wüest 10004779
+Ana Cannas da Silva 10032906
+Manuela Fischer 10083871
+Özlem Imamoglu 10003969
+Richard Pink 10004406
+Gisbert Wüstholz 10001787
+Sarah Zerbes 10081889
+Christian Steger 10071596
+Sara van de Geer 10016162
+Hantao Zhao 10054836
+Brigitte Rohner 10057751
+Berend Snijder 10048362
+Caroline Lustenberger 10075626
+Andrew de Mello 10032518
+Juerg Leuthold 10033685
+Roger Geiger 10059934
+Filipe Da Conceição Barata 10081408
+Torsten Hoefler 10033284
+Markus Püschel 10031799
+Peter L. Bühlmann 10003978
+Peter Acél 10002867
+Stefan Russmann 10038281
+Peter Manser 10014357
+Iro Armeni 10075431
+Habib Ammari 10042027
+Tobias Keller 10089433
+Menny Akka Ginosar 10039758
+Oliver Distler 10054179
+Martin Kröger 10010696
+Andreas Bauder 10005298
+Tobias Diehl 10032677
+Thomas Markus Ihn 10004259
+Jonas Anderegg 10075186
+Andrew de Mello 10032518
+Andrew de Mello 10032518
+Juerg Leuthold 10033685
+Roger Geiger 10059934
+Filipe Da Conceição Barata 10081408
+Torsten Hoefler 10033284
+Markus Püschel 10031799
+Peter L. Bühlmann 10003978
+Peter Acél 10002867
+Stefan Russmann 10038281
+Peter Manser 10014357
+Iro Armeni 10075431
+Habib Ammari 10042027
+Tobias Keller 10089433
+Menny Akka Ginosar 10039758
+Oliver Distler 10054179
+Martin Kröger 10010696
+Andreas Bauder 10005298
+Tobias Diehl 10032677
+Thomas Markus Ihn 10004259
+Jonas Anderegg 10075186
+Dylan Possamaï 10034198
+Kurt Bollmann 10044267
+Ana Klimovic 10064015
+Ce Zhang 10049008
+Michael Gnehm 10027248
+Christian Sailer 10082246
+Norbert Hungerbühler 10002882
+Rima Alaifari 10044038
+Lorenz Halbeisen 10033331
+Erich Walter Farkas 10012456
+Hans-Andrea Loeliger 10004047
+Arthur Elias Braunschweig 10032639
+Roman Stocker 10036161
+Srdjan Capkun 10020238
+Adrian Perrig 10033686
+Shweta Shinde 10072380
+Horst Adelmann 10004999
+Michael Schinhammer 10054950
+Beatrice Acciaio 10072377
+Patrick Cheridito 10042823
+Josef Teichmann 10029741
+Mario Valentin Wüthrich 10017668
+Roman Bosshard 10091989
+Vincent Tassion 10048364
+Martin Herbert Schroth 10004531
+Nicolai Meinshausen 10034017
+Kathrin Würth-Roderer 10088586
+Lorenz Hurni 10003750
+Christoph Vorburger 10030046
+Manfred Einsiedler 10029965
+Olivier Bachmann 10033513
+Juliane Hollender 10021598
+Christa Susanne McArdell 10003810
+Alessandra Iozzi 10006887
+Martin Vechev 10033027
+Peter Marcus Bach 10079601
+Daniela Rupp 10060886
+Jörg Rieckermann 10055399
+Giacomo Indiveri 10003870
+Georg von Arx 10033245
+Walter Kaufmann 10003975
+Philippe Block 10030183
+Oliver Ullrich 10035778
+Manuel Alexandre Pouchon 10034069
+Martin Lüthi 10019298
+Mauro Werder 10047998
+Dominik Hauswirth 10032259
+Martin Mächler 10002748
+Matthias Willmann 10029121
+Mauro Donegà 10033281
+Michael Siegenthaler 10050201
+Daniel Kopp 10078811
+Hans-Joachim Böckenhauer 10010256
+Dennis Komm 10034116
+Patrick Heiz 10032553
+Matthew Cook 10023538
+Niklaus Zimmermann 10019217
+Martin Raubal 10032107
+David Gugerli 10003935
+Alessio Figalli 10038660
+Tristan Rivière 10004853
+Andreas Krause 10032258
+Michail Makridis 10071915
+Daniel Studer 10008620
+Stefan Hesske 10023280
+Julia Rafflenbeul 10054389
+Fabian Lüchinger 10071350
+Thomas Hans Willwacher 10031327
+Jacob Corn 10057074
+David Cock 10058045
+Urs Aeberhard 10062990
+Helmut Bölcskei 10005057
+Andreas Adelmann 10028682
+Felix Oliver Friedrich Wicker 10022281
+Fadoua Balabdaoui 10047758
+Reinhard Furrer 10045645
+Marloes H. Maathuis 10023958
+Gabriel Chiodo 10063301
+Shiko Ben-Menahem 10035384
+Onur Mutlu 10045098
+Burkhard Ludewig 10020818
+Isabel Martinez 10088247
+Peter Feller 10056090
+Jonathan Benhamu Esayag 10062784
+Franziska Scholder-Aemisegger 10053080
+Urs Lang 10003967
+Heiko Stahl 10038698
+Achillefs Lazopoulos 10030727
+Barbara Frei Haller 10033695
+Daniel Kübler 10012156
+Matthias Ernst 10005203
+Hans Briner 10003143
+Martin Hartmann 10056829
+Martin Eglin 10037202
+Javier Pérez-Ramírez 10031038
+Lukas Emanuel Fässler 10036224
+Gustavo Alonso 10003452
+Stylianos Kazantzis 10078606
+Andreas Steiger 10043450
+David Basin 10005236
+Thomas Korner 10068942
+Hannes Reichel 10042343
+Carlos Cotrini Jimenez 10067770
+Siddhartha Mishra 10030184
+Giona Casiraghi 10047602
+Ueli Maurer 10002557
+Vasile Catrinel Gradinaru 10026989
+Patrick Steinegger 10076582
+Ralph Hansmann 10004830
+James Connolly 10003417
+Suchita Srinivasan 10071056
+Roger Wattenhofer 10004960
+Ghislain Fourny 10047678
+Michael Hoffmann 10015717
+Frank Hagedorn 10027603
+Stelian Coros 10054377
+Bernhard Thomaszewski 10031798
+Niklas Beisert 10032712
+Emma Wetter Slack 10036245
+Jan Ernest 10055324
+Alexander Ilic 10084027
+Laurent Vanbever 10040018
+Romain Jacob 10077906
+Matthias Münnich 10027763
+Christian Holz 10058615
+Otmar Hilliges 10033821
+Florian Altermatt 10033564
+Georg Mang 10064227
+Rachael Garrett 10060893
+Taras Gerya 10011138
+Nathanaël Perraudin 10089432
+Bernd Nowack 10004615
+Lukas Wacker 10062674
+Ralph Müller 10003329
+Elisabeth Giger 10064966
+Danica Cekić 10088266
+Melanie Paschke 10023638
+Eleonora Secchi 10053102
+Roger Boltshauser 10056645
+Matthias Bannert 10071057
+Jörg Goldhahn 10004796
+Tobias Heilmann 10030731
+Renate List 10030947
+Pascal Schütz 10055569
+Joanna Sleigh 10063376
+Hanspeter Schmid 10004561
+Marcel Berni 10056750
+Michel Wyss 10061890
+Felix Günther 10030007
+Benjamin Hohermuth 10085446
+Frank Krumeich 10015977
+Philipp Elbert 10038723
+Niko Beerenwinkel 10024078
+Florian Rittiner 10042341
+Fabio Bargardi 10093587
+Stefan Frei 10019179
+Maria Lukatskaya 10064023
+Rahul Pandharipande 10032718
+Lukas Ambühl 10054942
+Sucharita Beran-Ghosh 10027003
+Fisher Yu 10064020
+Timothy Roscoe 10020997
+Julien Allaz 10060527
+Sabine Müller 10051168
+Sebastian Sippel 10071913
+Dennis Hofheinz 10066946
+Laura Ermert 10090828
+Fabio Zünd 10089427
+Andreas Voegelin 10019220
+Bruno Giuseppe Rüttimann 10032312
+Samad Sarferaz 10032120
+Zhisong He 10091816
+Frank Kagan Gürkaynak 10032113
+Reto Müller 10052060
+Shih-Chii Liu 10004394
+Tobias Delbrück 10004395
+Pawel Pyk 10042802
+Davide Scaramuzza 10028761
+Mario Schirmer 10033279
+Marc Immer 10079438
+Bradley Nelson 10005190
+Joram Schito 10078509
+Marcel Zumbühl 10030691
+Judit Szulágyi 10076586
+Gabriel Loumeau 10045738
+Vartan Kurtcuoglu 10020179
+René Steiger 10002383
+Johannes Brödel 10035178
+Alessandro Tellini 10051474
+François Charbonnet 10032554
+Alex Hajnal 10020698
+Andrea Manconi 10043239
+Christopher Lucien Mutel 10035444
+Jörg Dominik Rickli 10044609
+Johanna Franziska Just 10089352
+Christian Münz 10028783
+Michael Wagner 10034941
+Heinz Alois Russheim 10004730
+Lorenz Gubler 10055104
+Markus Meyer 10032587
+Kurt Eggenschwiler 10003250
+Harry Zekollari 10048264
+Philipp Urech 10083978
+Emmanuel Delamarche 10038699
+Christoph Schneider 10065244
+Vittorio Del Duca 10048251
+George Haller 10033680
+Oliver Renn 10038784
+Christine Weber 10038468
+Florian J. Egloff 10079227
+Thomas Michael Wohlgemuth 10021587
+Wendelin Werner 10033701
+Florentin Constancias 10067910
+Fabiano Orelli 10071726
+Manu Kapur 10048351
+Roy Smith 10032878
+Thomas Michael Wohlgemuth 10021587
+Wendelin Werner 10033701
+Florentin Constancias 10067910
+Fabiano Orelli 10071726
+Manu Kapur 10048351
+Roy Smith 10032878
+Niao He 10072379
+Nicolas Gruber 10020099
+Emmanuel Kowalski 10025958
+Florian Dörfler 10038166
+Martin Schweizer 10009315
+David Rosenthal 10019837
+Laura Kobel-Keller 10049120
+Frederic Evers 10055088
+Stephan Pfister 10033997
+Martin Vogt 10092426
+Joachim M. Buhmann 10009696
+Menna Elassady 10083967
+Peter Andreas Kast 10004138
+Francesca Da Lio 10023206
