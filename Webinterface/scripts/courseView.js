@@ -43,7 +43,7 @@ window.addEventListener('load', function() {
 
         },
         error: function(data) {
-            alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
+            alert('\'Error [\' + xhr.status + \'] while running course load:\n\n' + data.responseText);
         }
     });
 });

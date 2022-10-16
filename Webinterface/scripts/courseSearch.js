@@ -28,7 +28,7 @@ class CourseSearch {
             this._courseView.append('Seems like only you and me are wanting to take this course...');
         }
         for (let i = 0; i < courses.length; i++) {
-            this.addCourse(courses[i]['_id'], courses[i]['title'], courses[i]['readable_id'], courses[i]['abstract']);
+            this.addCourse(courses[i]['id'], courses[i]['title'], courses[i]['readable_id'], courses[i]['abstract']);
         }
     }
 }
