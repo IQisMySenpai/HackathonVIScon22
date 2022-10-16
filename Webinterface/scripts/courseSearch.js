@@ -6,7 +6,7 @@ class CourseSearch {
 
         this._courseView.on('click', 'div.lecture', function () {
             let id = $(this).attr('id');
-            console.log(id);
+            window.location.href = '/course/?id=' + id;
         });
     }
 
@@ -39,7 +39,7 @@ window.addEventListener('load', function() {
     let params = getParameters('search');
 
     let data = {
-        query: params['query']
+        query: decodeURI(params['query'])
     };
 
     if (params['tags'] !== undefined) {

@@ -1,3 +1,4 @@
+import bson.objectid
 from fastapi import Response, Request, Query
 from bson.objectid import ObjectId
 from mongo_api import *
@@ -56,37 +57,32 @@ def load_courses_helper(courses: List[dict], db: MongoAPI, response: Response):
 
     course_list: List[Course] = Course.from_db(courses)
     load_lecturer_for_courses(db, course_list)
+    filter_reported_reviews(course_list)
 
-    return pack_response(response, 200, "ok", {"courses": Course().out(course_list)})
+    return pack_response(response, 200, "ok", {"courses": Course.out(course_list)})
 
 
-def list_courses(db: MongoAPI, response: Response, page):
-    courses = db.find("courses", skip=20 * page, limit=20)
+def list_courses(db: MongoAPI, response: Response, course_id: ObjectId, page: int):
+    if course_id is None:
+        courses = db.find("courses", skip=20 * page, limit=20)
+    else:
+        courses = db.find("courses", filter_dict={'_id': course_id}, limit=1)
     return load_courses_helper(courses, db, response)
 
+def query_courses(db: MongoAPI, response: Response, query: str, tags: List[str] = None, page: int = 0):
 
-def query_courses(db: MongoAPI, response: Response, query: str, tags: List[str] = Query(default=None), page: int = 0):
-
-    # name
-    # mongo id
-    # readable-id
-    # description
-
+    regex = None
     if query is not None:
         regex = ".*" + query + ".*"
         regex = regex.replace(" ", ".*")
 
-    if tags is not None:
-        tags = [ObjectId(tag) for tag in tags]
-
-    print(tags)
     courses = None
     if query is not None and tags is None:
         courses = list(db.collection("courses").find({"title": {"$regex": regex, '$options': 'i'}}).skip(20*page).limit(20))
     elif query is not None and tags is not None:
-        courses = list(db.collection("courses").find({"title": {"$regex": regex, '$options': 'i'}, "tags._id": {"$in": tags}}).skip(20*page).limit(20))
+        courses = list(db.collection("courses").find({"title": {"$regex": regex, '$options': 'i'}, "tags._id": {"$all": tags}}).skip(20*page).limit(20))
     elif query is None and Tag is not None:
-        courses = list(db.collection("courses").find({"tags._id": {"$in": tags}}).skip(20*page).limit(20))
+        courses = list(db.collection("courses").find({"tags._id": {"$all": tags}}).skip(20*page).limit(20))
     else:
         return pack_response(response, 400, "Specify tags or query.")
 
@@ -108,20 +104,64 @@ def create_course(db: MongoAPI, response: Response, course: Course):
 
     return pack_response(response, 200, "ok", {"id": course.id.__str__()})
 
+def create_review(db: MongoAPI, request: Request, response: Response, review: Review):
 
+    data, logged = test_login(request, response)
+    if not logged:
+        return pack_response(response, 403, "sign in pls")
+
+    review.username = data["preferred_username"]
+    review.is_reported = False
+    review.m_id = bson.objectid.ObjectId()
+    review.date = time.time()
+
+    count = db.update("courses", {'_id': review.course_id}, {
+        '$push': {
+            'reviews': review.db_dict()
+        }
+    })
+
+    if count == 0:
+        return pack_response(response, 400, "No course has been updated")
+    return pack_response(response, 200, "ok")
+
+def flag_review(db: MongoAPI, request: Request, response: Response, course_id: ObjectId, review_id: ObjectId):
+
+    data, logged = test_login(request, response)
+    if not logged:
+        return pack_response(response, 403, "sign in pls")
+
+    username = data["preferred_username"]
+    result = db.find_one("moderators", {'username': username})
+
+    if result is None:
+        return pack_response(response, 403, "forbidden?")
+
+    count = db.update("courses", {"_id": course_id, "reviews._id": review_id}, {"$set": {'reviews.$.is_reported': True}})
+
+    if count == 0:
+        return pack_response(response, 400, "no review updated")
+
+    return pack_response(response, 200, "ok")
+
+
+def filter_reported_reviews(courses: List[Course]):
+    for course in courses:
+        if course.reviews is None:
+            continue
+        course.reviews = [review for review in course.reviews if not review.is_reported]
 def load_lecturer_for_courses(db: MongoAPI, courses: List[Course]):
     for course in courses:
         if course.lecturers is None:
             continue
         course.lecturers = Lecturer.from_db(db.find("professors", find_all_id_query(course.lecturers), limit=10))
 
-
 def test_login(request: Request, response: Response):
     id_token = request.headers.get("Authorization")
     print(id_token)
 
     if id_token is None:
-        return pack_response(response=response, status=401, message="Login required")
+        return pack_response(response=response, status=401, message="Login required"), False
 
     try:
         user_info = jwt.decode(jwt=id_token, key=key, algorithms=["RS256"], options={"verify_aud": False}), False

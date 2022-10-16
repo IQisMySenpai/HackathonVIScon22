@@ -4,6 +4,10 @@ from courses import Course, Tag
 
 # mongo.collection("courses").create_index([('title', 'text')])
 
+mongo.insert_one("moderators", {"username": "mod"})
+
+
+exit()
 tags = Tag.from_db(mongo.find("tags"))
 tags = [tag.db_dict() for tag in tags]
 
