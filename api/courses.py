@@ -104,10 +104,16 @@ def create_course(db: MongoAPI, response: Response, course: Course):
 
     return pack_response(response, 200, "ok", {"id": course.id.__str__()})
 
-def create_review(db: MongoAPI, response: Response, review: Review):
+def create_review(db: MongoAPI, request: Request, response: Response, review: Review):
 
+    data, logged = test_login(request, response)
+    if not logged:
+        return pack_response(response, 403, "sign in pls")
+
+    review.username = data["preferred_username"]
     review.is_reported = False
     review.m_id = bson.objectid.ObjectId()
+    review.date = time.time()
 
     count = db.update("courses", {'_id': review.course_id}, {
         '$push': {
@@ -119,10 +125,13 @@ def create_review(db: MongoAPI, response: Response, review: Review):
         return pack_response(response, 400, "No course has been updated")
     return pack_response(response, 200, "ok")
 
-def flag_review(db: MongoAPI, response: Response, course_id: ObjectId, review_id: ObjectId):
+def flag_review(db: MongoAPI, request: Request, response: Response, course_id: ObjectId, review_id: ObjectId):
 
-    # TODO check is moderator
-    username = "mod"
+    data, logged = test_login(request, response)
+    if not logged:
+        return pack_response(response, 403, "sign in pls")
+
+    username = data["preferred_username"]
     result = db.find_one("moderators", {'username': username})
 
     if result is None:
@@ -145,13 +154,12 @@ def load_lecturer_for_courses(db: MongoAPI, courses: List[Course]):
             continue
         course.lecturers = Lecturer.from_db(db.find("professors", find_all_id_query(course.lecturers), limit=10))
 
-
 def test_login(request: Request, response: Response):
     id_token = request.headers.get("Authorization")
     print(id_token)
 
     if id_token is None:
-        return pack_response(response=response, status=401, message="Login required")
+        return pack_response(response=response, status=401, message="Login required"), False
 
     try:
         user_info = jwt.decode(jwt=id_token, key=key, algorithms=["RS256"], options={"verify_aud": False}), False
