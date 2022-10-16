@@ -1,0 +1,36 @@
+Good Afternoon 
+
+We're so glad you could join us today.
+Our team Alcohol and Programming go Brr. We strive to optimize workflows, rethink solutions and integrate applications from the ground up into the the eth ecosystem. 
+
+In the short amount of time we had, we've produced an entirely new product for the studnets that offers a compleatly new and vastley improved workflow - a simple yet deeply profound webappp. 
+
+With this solution your searching abilities will go though the roof.
+
+=> open
+
+It's simple user interface makes it easy for students to search through the course catalogue of ETH. 
+
+The intuitive tagging system allows users to find Courses that fit their special needs and abilities. 
+
+So let's check out the most important course of ETH, the course of our lord and saviour Ueli Maurer, Diskret Math. "Glasklar oder?"
+
+=> Perform search
+
+On this beatuifuly desing results page you can see the courses our advanced MongoDB searching system found matching your specal needs.
+
+Once you've selected a courses you can see the Information the course gives you in it's intirety. And below the results of your predecessors.
+
+Once you've logged yourself in with our intuitive integraton of the ETH Auth service, you can write down your feelings regarding your course.
+
+=> Write a review
+
+You can rate the Difficulty, Workload and Jokes.
+
+=> Diff 5, work 5, Jokes 2.5 => (He's nothing compared to our favourit standup commedion Özlem Immoglu)
+
+Then you can provide your insights on what was good and bad about the course (+ Ueli Maurer, - Only proofs in the exam)
+
+And lastly you can Freely enter your opinion of the course.
+
+Thank you for joining us and have a great day.
