@@ -71,34 +71,78 @@ class Lecturer(BaseModel):
                 "title": self.title, "department": self.department}
 
 
-class Review(BaseModel):
-    id: Union[str, None] = None
-    date: Union[int, None] = None
+class Rating(BaseModel):
+    m_id: Union[str, None] = None
+    name: Union[str, None] = None
     rating: Union[int, None] = None
-    pos: Union[int, None] = None
-    neg: Union[int, None] = None
+    @staticmethod
+    def from_db(ratings):
+        return [Rating().from_dict(d) for d in ratings]
 
     @staticmethod
-    def from_db(profs):
-        return [Lecturer().from_dict(d) for d in profs]
-
-    @staticmethod
-    def out(profs):
-        if profs is None:
+    def out(ratings):
+        if ratings is None:
             return []
-        return [prof.out_dict() for prof in profs]
+        return [rating.out_dict() for rating in ratings]
+    @staticmethod
+    def db_out(ratings):
+        if ratings is None:
+            return []
+        return [rating.db_dict() for rating in ratings]
 
     def from_dict(self, d):
-        self.id = d.get("_id")
-        self.first_name = d.get("first_name")
-        self.last_name = d.get("last_name")
-        self.department = d.get("department")
-        self.title = d.get("title")
+        self.m_id = d.get("_id")
+        self.name = d.get("name")
+        self.rating = d.get("rating")
         return self
+    def db_dict(self):
+        return {"name": self.name, "rating": self.rating}
 
     def out_dict(self):
-        return {"id": self.id.__str__(), "first_name": self.first_name, "last_name": self.last_name,
-                "title": self.title, "department": self.department}
+        return {"id": self.m_id.__str__(), "name": self.name, "rating": self.rating}
+
+
+class Review(BaseModel):
+    m_id: Union[str, None] = None
+    course_id: Union[str, None] = None
+    date: Union[int, None] = None
+    rating: Union[List[Rating], None] = None
+    pos: Union[List[str], None] = None
+    neg: Union[List[str], None] = None
+    text: Union[str, None] = None
+    author: Union[str, None] = None
+    is_reported: Union[bool, None] = None
+
+    @staticmethod
+    def from_db(reviews):
+        return [Review().from_dict(d) for d in reviews]
+
+    @staticmethod
+    def out(reviews):
+        if reviews is None:
+            return []
+        return [review.out_dict() for review in reviews]
+
+    def from_dict(self, d):
+        self.m_id = d.get("_id")
+        self.date = d.get("date")
+        self.neg = d.get("neg")
+        self.pos = d.get("pos")
+        self.text = d.get("text")
+        self.author = d.get("author")
+        self.is_reported = d.get("is_reported")
+
+        if "ratings" in d:
+            self.rating = Rating.from_db(d["ratings"])
+        return self
+
+    def db_dict(self):
+        return {"text": self.text, "date": self.date,
+                "neg": self.neg, "pos": self.pos, "author": self.author, "ratings": Rating.db_out(self.rating), "is_reported": self.is_reported}
+
+    def out_dict(self):
+        return {"id": self.m_id.__str__(), "text": self.text, "date": self.date,
+                "neg": self.neg, "pos": self.pos, "author": self.author, "ratings": Rating.out(self.rating)}
 
 
 class Course(BaseModel):

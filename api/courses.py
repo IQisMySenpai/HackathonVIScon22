@@ -107,6 +107,20 @@ def create_course(db: MongoAPI, response: Response, course: Course):
 
     return pack_response(response, 200, "ok", {"id": course.id.__str__()})
 
+def create_review(db: MongoAPI, response: Response, review: Review):
+
+    review.is_reported = False
+
+    count = db.update("courses", {'_id': review.course_id}, {
+        '$push': {
+            'reviews': review.db_dict()
+        }
+    })
+
+    if count == 0:
+        return pack_response(response, 400, "No course has been updated")
+    return pack_response(response, 200, "ok")
+
 
 def load_lecturer_for_courses(db: MongoAPI, courses: List[Course]):
     for course in courses:
