@@ -82,10 +82,12 @@ class Review {
         }
         html += '</div></div>';
         html += '</div><div class="reviewRatings">';
-        for (let i = 0; i < rating.length; i++) {
-            html += '<div class="reviewRating"><div class="reviewRatingHeader">' + rating[i]['name'] + '</div><div class="reviewRatingStars">';
-            html += getStars(rating[i]['rating']);
-            html += '</div></div>';
+        if (rating !== undefined) {
+            for (let i = 0; i < rating.length; i++) {
+                html += '<div class="reviewRating"><div class="reviewRatingHeader">' + rating[i]['name'] + '</div><div class="reviewRatingStars">';
+                html += getStars(rating[i]['rating']);
+                html += '</div></div>';
+            }
         }
         html += '</div></div>';
         html += '<div class="reviewInfo"><div class="reviewUsername">';
@@ -100,7 +102,7 @@ class Review {
 
     addOldReviews(reviews) {
         for (let i = 0; i < reviews.length; i++) {
-            this.addOldReview(reviews[i]['username'], reviews[i]['date'], reviews[i]['rating'], reviews[i]['text'], reviews[i]['pos'], reviews[i]['neg']);
+            this.addOldReview(reviews[i]['author'], reviews[i]['date'], reviews[i]['ratings'], reviews[i]['text'], reviews[i]['pos'], reviews[i]['neg']);
         }
     }
 }
