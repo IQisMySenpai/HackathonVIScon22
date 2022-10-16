@@ -4,40 +4,12 @@ class Review {
     _reviews = false
     _oldReviews = null;
     _tags = [];
+    _review_count = 0;
 
     constructor(id) {
         this._id = id;
         this._review = $('<div class="reviews"></div>');
         $('main').append(this._review);
-
-
-        /*$.ajax({
-            url: '/api/tags',
-            method: 'GET',
-            success: function(data) {
-                ref._tags = data['tags'];
-                ref.newReviewField([{'name': 'Difficulty'}, {'name': 'Workload'}, {'name': 'Jokes'}]);
-
-                ref.oldReviews();
-
-                $.ajax({
-                    url: '/api/reviews',
-                    data: {
-                        'course_id': ref._id
-                    },
-                    method: 'GET',
-                    success: function(data) {
-                        ref.addOldReviews(this.data['reviews']);
-                    },
-                    error: function(data) {
-                        alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
-                    }
-                });
-            },
-            error: function(data) {
-                alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
-            }
-        });*/
     }
 
     newReviewField(ratings) {
@@ -99,7 +71,13 @@ class Review {
             this.oldReviews();
         }
 
-        let html = '<div class="review"><div class="reviewContent"><div class="reviewTexts">'
+        let html = '';
+
+        if (this._review_count > 0) {
+            html += '<hr>';
+        }
+
+        html += '<div class="review"><div class="reviewContent"><div class="reviewTexts">'
         html += '<div class="reviewTextArea">' + text + '</div>';
         html += '<div class="reviewPosVNegs"><div class="reviewPos">';
         for (let i = 0; i < pos.length; i++) {
@@ -111,16 +89,19 @@ class Review {
         }
         html += '</div></div>';
         html += '</div><div class="reviewRatings">';
-        for (let i = 0; i < rating.length; i++) {
-            html += '<div class="reviewRating"><div class="reviewRatingHeader">' + rating[i]['name'] + '</div><div class="reviewRatingStars">';
-            html += getStars(rating[i]['rating']);
-            html += '</div></div>';
+        if (rating !== undefined) {
+            for (let i = 0; i < rating.length; i++) {
+                html += '<div class="reviewRating"><div class="reviewRatingHeader">' + rating[i]['name'] + '</div><div class="reviewRatingStars">';
+                html += getStars(rating[i]['rating']);
+                html += '</div></div>';
+            }
         }
         html += '</div></div>';
         html += '<div class="reviewInfo"><div class="reviewUsername">';
         html += username;
         html += '</div> - <div class="reviewDate">';
-        html += date;
+        let dateObj = new Date(date);
+        html += '' + dateObj.getDate() + '.' + (dateObj.getMonth() + 1) + '.' + dateObj.getFullYear();
         html += '</div> <div class="reviewReport">- Report</div></div>';
 
         this._oldReviews.append(html);
@@ -128,7 +109,7 @@ class Review {
 
     addOldReviews(reviews) {
         for (let i = 0; i < reviews.length; i++) {
-            this.addOldReview(reviews[i]['username'], reviews[i]['date'], reviews[i]['rating'], reviews[i]['text'], reviews[i]['pos'], reviews[i]['neg']);
+            this.addOldReview(reviews[i]['author'], reviews[i]['date'], reviews[i]['ratings'], reviews[i]['text'], reviews[i]['pos'], reviews[i]['neg']);
         }
     }
 }
@@ -259,6 +240,7 @@ function postReview () {
 
     if (cookie === undefined || cookie === null || cookie === '') {
         alert('You must be logged in to post a review.');
+        return;
     }
 
     $.ajax({

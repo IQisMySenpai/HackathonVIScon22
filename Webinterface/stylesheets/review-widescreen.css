@@ -214,6 +214,13 @@
 
 .review {
     margin: 0 0 2rem 0;
+    padding: 0 0 2rem 0;
+    border-bottom: var(--section-border);
+}
+
+.review:last-child {
+    border-bottom: 0 none;
+    padding: 0;
 }
 
 .review:last-child {

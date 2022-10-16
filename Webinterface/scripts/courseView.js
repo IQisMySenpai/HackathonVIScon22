@@ -34,6 +34,9 @@ window.addEventListener('load', function() {
                 success: function(stuff) {
                     review._tags = stuff['tags'];
                     review.newReviewField(ratings);
+
+                    review.oldReviews();
+                    review.addOldReviews(lecture[0]['reviews']);
                 },
                 error: function(data) {
                     alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
@@ -43,7 +46,7 @@ window.addEventListener('load', function() {
 
         },
         error: function(data) {
-            alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
+            alert('\'Error [\' + xhr.status + \'] while running course load:\n\n' + data.responseText);
         }
     });
 });
