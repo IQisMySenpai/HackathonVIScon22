@@ -112,6 +112,7 @@ class Review(BaseModel):
     text: Union[str, None] = None
     author: Union[str, None] = None
     is_reported: Union[bool, None] = None
+    tags: Union[List[str], None] = None
 
     @staticmethod
     def from_db(reviews):
