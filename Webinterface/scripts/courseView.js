@@ -11,7 +11,7 @@ window.addEventListener('load', function() {
         success: function(data) {
             let lecture = data['courses'];
             let course = new Course();
-            course.setCourseName(lecture[0]['title']);
+            course.setCourseName(lecture[0]['title'], id);
             course.setCourseAddition(lecture[0]['readable_id']);
             let desc = lecture[0]['abstract'] + '<br><br>' + lecture[0]['objective'];
             if (lecture[0]['content'] !== null && lecture[0]['content'].length > 30) {

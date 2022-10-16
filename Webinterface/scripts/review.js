@@ -227,6 +227,7 @@ function postReview () {
     }
 
     let data = {
+        course_id: $('.reviewHeader').attr('id'),
         text: text,
         pos: pos,
         neg: neg,
