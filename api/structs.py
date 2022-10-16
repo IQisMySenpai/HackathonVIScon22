@@ -158,7 +158,7 @@ class Course(BaseModel):
     objective: Union[str, None] = None
     content: Union[str, None] = None
     tags: Union[List[Tag], None] = None
-    ratings: Union[int, None] = None
+    reviews: Union[List[Review], None] = None
 
     @staticmethod
     def from_db(courses):
@@ -166,7 +166,7 @@ class Course(BaseModel):
 
     @staticmethod
     def out(courses):
-        return [course.full_dict() for course in courses]
+        return [course.out_dict() for course in courses]
 
     def from_dict(self, d):
         self.m_id = d.get("_id")
@@ -180,7 +180,9 @@ class Course(BaseModel):
         self.hours = d.get("hours")
         self.objective = d.get("objective")
         self.content = d.get("content")
-        self.ratings = d.get("ratings")
+
+        if "reviews" in d:
+            self.reviews = Review.from_db(d["reviews"])
 
         if "tags" in d:
             self.tags = Tag.from_db(d["tags"])
@@ -190,10 +192,7 @@ class Course(BaseModel):
             for lecturer_id in d["lecturer"]:
                 lecturer = Lecturer()
                 lecturer.id = lecturer_id
-                # print(lecturer)
                 self.lecturers.append(lecturer)
-
-        print(self.m_id)
         return self
 
     def db_dict(self):
@@ -201,13 +200,9 @@ class Course(BaseModel):
                 "lecturer": Lecturer.out(self.lecturers), "tags": Tag.db_out(self.tags)}
 
     def out_dict(self):
-        return {"id": self.m_id.__str__(), "title": self.title, "abstract": self.abstract,
-                "lecturers": Lecturer.out(self.lecturers), "tags": Tag.out(self.tags)}
-
-    def full_dict(self):
-        return {"_id": str(self.m_id),
+        return {"id": str(self.m_id),
                 "lecturer": Lecturer.out(self.lecturers),
-                "tags": Tag.db_out(self.tags),
+                "tags": Tag.out(self.tags),
                 "segments": self.segments,
                 "readable_id": self.readable_id,
                 "title": self.title,
@@ -217,6 +212,5 @@ class Course(BaseModel):
                 "abstract": self.abstract,
                 "objective": self.objective,
                 "content": self.content,
-                "ratings": self.ratings
-
-                }
+                "reviews": Review.out(self.reviews)
+            }
