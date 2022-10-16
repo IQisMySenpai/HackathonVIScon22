@@ -57,6 +57,7 @@ def load_courses_helper(courses: List[dict], db: MongoAPI, response: Response):
 
     course_list: List[Course] = Course.from_db(courses)
     load_lecturer_for_courses(db, course_list)
+    filter_reported_reviews(course_list)
 
     return pack_response(response, 200, "ok", {"courses": Course.out(course_list)})
 
@@ -134,6 +135,10 @@ def flag_review(db: MongoAPI, response: Response, course_id: ObjectId, review_id
 
     return pack_response(response, 200, "ok")
 
+
+def filter_reported_reviews(courses: List[Course]):
+    for course in courses:
+        course.reviews = [review for review in course.reviews if not review.is_reported]
 def load_lecturer_for_courses(db: MongoAPI, courses: List[Course]):
     for course in courses:
         if course.lecturers is None:
