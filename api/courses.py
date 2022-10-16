@@ -57,7 +57,7 @@ def load_courses_helper(courses: List[dict], db: MongoAPI, response: Response):
     course_list: List[Course] = Course.from_db(courses)
     load_lecturer_for_courses(db, course_list)
 
-    return pack_response(response, 200, "ok", {"courses": Course().out(course_list)})
+    return pack_response(response, 200, "ok", {"courses": Course.out(course_list)})
 
 
 def list_courses(db: MongoAPI, response: Response, page):
