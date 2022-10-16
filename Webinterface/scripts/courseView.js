@@ -49,7 +49,7 @@ window.addEventListener('load', function() {
             }
 
             for (let i = 0; i < ratings.length; i++) {
-                rating[i]['rating'] = avg_rating[ratings[i]['name']];
+                ratings[i]['rating'] = avg_rating[ratings[i]['name']];
             }
 
             course.addCourseRatings(ratings);
