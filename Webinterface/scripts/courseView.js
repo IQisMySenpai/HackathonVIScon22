@@ -13,7 +13,10 @@ window.addEventListener('load', function() {
             let course = new Course();
             course.setCourseName(lecture[0]['title']);
             course.setCourseAddition(lecture[0]['readable_id']);
-            let desc = lecture[0]['abstract'] + '<br><br>' + lecture[0]['objective'] + '<br><br>' + lecture[0]['content'];
+            let desc = lecture[0]['abstract'] + '<br><br>' + lecture[0]['objective'];
+            if (lecture[0]['content'] !== null && lecture[0]['content'].length > 30) {
+                desc += '<br><br>' + lecture[0]['content'];
+            }
             course.setCourseDescription(desc);
 
             course.addCourseTags([{'name': 'Informatik', 'color': 'dark sea green'}, {'name': 'Sem 1', 'color':'orchid'}, {'name': 'GlasKlar', 'color':'salmon'}, {'name': 'Exam', 'color':'lightgreen'}]);
