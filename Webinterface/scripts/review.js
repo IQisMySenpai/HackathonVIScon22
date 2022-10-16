@@ -66,18 +66,14 @@ class Review {
         return this;
     }
 
-    addOldReview(username, date, rating, text, pos, neg) {
+    addOldReview(username, date, rating, text, pos, neg, id) {
         if (!this._reviews) {
             this.oldReviews();
         }
 
         let html = '';
 
-        if (this._review_count > 0) {
-            html += '<hr>';
-        }
-
-        html += '<div class="review"><div class="reviewContent"><div class="reviewTexts">'
+        html += '<div class="review" id="' + id + '"><div class="reviewContent"><div class="reviewTexts">'
         html += '<div class="reviewTextArea">' + text + '</div>';
         html += '<div class="reviewPosVNegs"><div class="reviewPos">';
         for (let i = 0; i < pos.length; i++) {
@@ -102,7 +98,7 @@ class Review {
         html += '</div> - <div class="reviewDate">';
         let dateObj = new Date(date);
         html += '' + dateObj.getDate() + '.' + (dateObj.getMonth() + 1) + '.' + dateObj.getFullYear();
-        html += '</div> <div class="reviewReport">- Report</div></div>';
+        html += '</div> <button class="reviewReport">- Report</button></div>';
 
         this._oldReviews.append(html);
     }
@@ -237,8 +233,6 @@ function postReview () {
         tags: tags
     };
 
-    console.log(data);
-
     let cookie = getCookies()['id_token'];
 
     if (cookie === undefined || cookie === null || cookie === '') {
@@ -276,4 +270,8 @@ function postReview () {
             alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
         }
     });
+}
+
+function report () {
+
 }
