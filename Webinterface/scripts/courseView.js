@@ -3,7 +3,7 @@ window.addEventListener('load', function() {
     let id = params['id'];
 
     $.ajax({
-        url: '/api/query/course/',
+        url: '/api/courses/',
         data: {
             'course_id': id
         },
