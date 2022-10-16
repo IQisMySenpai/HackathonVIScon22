@@ -7,6 +7,7 @@ from structs import *
 from typing import List
 import jwt
 import jwt.exceptions as jex
+import os
 
 # ======================================================================================================================
 # Globals
@@ -217,5 +218,32 @@ def test_login(request: Request, response: Response):
         return pack_response(response=response, status=401, message="Expired Authorisation, Login Again"), False
 
     return user_info, True
+
+
+def get_lecturer_image(response: Response, vvz_id: int):
+    folder = "../Webinterface/test_images"
+
+    jpg = os.path.join(folder, f"{vvz_id}.jpg")
+    png = os.path.join(folder, f"{vvz_id}.png")
+    jpeg = os.path.join(folder, f"{vvz_id}.jpeg")
+    gif = os.path.join(folder, f"{vvz_id}.gif")
+    svg = os.path.join(folder, f"{vvz_id}.svg")
+
+    if os.path.exists(jpg):
+        return pack_response(response, 200, "Success", {"path": os.path.join("test_images", os.path.basename(jpg))})
+
+    if os.path.exists(jpeg):
+        return pack_response(response, 200, "Success", {"path": os.path.join("test_images", os.path.basename(jpeg))})
+
+    if os.path.exists(png):
+        return pack_response(response, 200, "Success", {"path": os.path.join("test_images", os.path.basename(png))})
+
+    if os.path.exists(gif):
+        return pack_response(response, 200, "Success", {"path": os.path.join("test_images", os.path.basename(gif))})
+
+    if os.path.exists(svg):
+        return pack_response(response, 200, "Success", {"path": os.path.join("test_images", os.path.basename(svg))})
+
+    return pack_response(response, 404, "No Image found", {})
 
 

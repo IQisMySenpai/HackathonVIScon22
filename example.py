@@ -1,8 +1,13 @@
-from mongo_api import MongoAPI
+import os
+import shutil
 
-if __name__ == "__main__":
-    mongo = MongoAPI('vvzpp.5byhvi1.mongodb.net', 'VVZpp', 'server', 'Xr9wqtrvnlufZQho')
+files = os.listdir("/home/alisot2000/Desktop/lecturer")
+ext = []
 
+for file in files:
+    ex = os.path.splitext(file)[1]
 
+    if ex not in ext:
+        ext.append(ex)
 
-print("Alex did some stuff which is working... or not")
+print(ext)

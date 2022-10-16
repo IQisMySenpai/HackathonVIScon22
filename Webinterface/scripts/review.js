@@ -98,14 +98,14 @@ class Review {
         html += '</div> - <div class="reviewDate">';
         let dateObj = new Date(date);
         html += '' + dateObj.getDate() + '.' + (dateObj.getMonth() + 1) + '.' + dateObj.getFullYear();
-        html += '</div> <button class="reviewReport">- Report</button></div>';
+        html += '</div> <button class="reviewReport" onclick="report(this)">- Report</button></div>';
 
         this._oldReviews.append(html);
     }
 
     addOldReviews(reviews) {
         for (let i = 0; i < reviews.length; i++) {
-            this.addOldReview(reviews[i]['author'], reviews[i]['date'], reviews[i]['ratings'], reviews[i]['text'], reviews[i]['pos'], reviews[i]['neg']);
+            this.addOldReview(reviews[i]['author'], reviews[i]['date'], reviews[i]['ratings'], reviews[i]['text'], reviews[i]['pos'], reviews[i]['neg'], reviews[i]['id']);
         }
     }
 }
@@ -272,6 +272,33 @@ function postReview () {
     });
 }
 
-function report () {
+function report (element) {
+    let id = $('.courseHeader').attr('id');
+    let review = $(element).closest('.review');
+    let reviewId = review.attr('id');
+    let cookie = getCookies()['id_token'];
 
+    if (cookie === undefined || cookie === null || cookie === '') {
+        alert('You must be logged in to report a report.');
+        return;
+    }
+
+    $.ajax({
+        url: '/api/courses/review/report',
+        method: 'GET',
+        data: {
+            course_id: id,
+            review_id: reviewId
+        },
+        headers: {
+            'Authorization': cookie || ''
+        },
+        success: function(data) {
+            alert('Course Reported');
+            review.remove();
+        },
+        error: function(data) {
+            alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
+        }
+    });
 }

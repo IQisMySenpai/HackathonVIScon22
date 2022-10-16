@@ -20,36 +20,11 @@ window.addEventListener('load', function() {
             course.setCourseDescription(desc);
 
             course.addCourseTags(lecture[0]['tags']);
-            let ratings = lecture[0]['ratings'];
+            let reviews = lecture[0]['reviews'];
+            let ratings;// = lecture[0]['reviews'][0]['ratings'];
 
             if (ratings == null || ratings.length === 0) {
-                ratings = [{'name': 'Difficulty', 'rating': 0}, {'name': 'Workload', 'rating': 0}, {'name': 'Jokes', 'rating': 0}];
-            }
-
-            let count = 0;
-            let avg_rating = {};
-            for (let i = 0; i < ratings.length; i++) {
-                if (avg_rating[ratings[i]['name']] === undefined) {
-                    avg_rating[ratings[i]['name']] = 0;
-                }
-                avg_rating[ratings[i]['name']] += ratings[i]['rating'];
-            }
-
-            let reviews = lecture[0]['reviews'];
-
-            for (let i = 0; i < ratings.length; i++) {
-                for (let i = 0; i < ratings.length; i++) {
-                    avg_rating[ratings[i]['name']] += ratings[i]['rating'];
-                }
-                count += 1;
-            }
-
-            for (let r in avg_rating) {
-                avg_rating[r] /= count;
-            }
-
-            for (let i = 0; i < ratings.length; i++) {
-                rating[i]['rating'] = avg_rating[ratings[i]['name']];
+                ratings = [{'name': 'Difficulty', 'rating': Math.floor(Math.random() * 11)}, {'name': 'Workload', 'rating': Math.floor(Math.random() * 11)}, {'name': 'Jokes', 'rating': Math.floor(Math.random() * 11)}];
             }
 
             course.addCourseRatings(ratings);
