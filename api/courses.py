@@ -1,3 +1,4 @@
+import bson.objectid
 from fastapi import Response, Request, Query
 from bson.objectid import ObjectId
 from mongo_api import *
@@ -110,6 +111,7 @@ def create_course(db: MongoAPI, response: Response, course: Course):
 def create_review(db: MongoAPI, response: Response, review: Review):
 
     review.is_reported = False
+    review.m_id = bson.objectid.ObjectId()
 
     count = db.update("courses", {'_id': review.course_id}, {
         '$push': {

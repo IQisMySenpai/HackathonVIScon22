@@ -137,7 +137,7 @@ class Review(BaseModel):
         return self
 
     def db_dict(self):
-        return {"text": self.text, "date": self.date,
+        return {"m_id": self.m_id, "text": self.text, "date": self.date,
                 "neg": self.neg, "pos": self.pos, "author": self.author, "ratings": Rating.db_out(self.rating), "is_reported": self.is_reported}
 
     def out_dict(self):
@@ -200,7 +200,8 @@ class Course(BaseModel):
                 "lecturer": Lecturer.out(self.lecturers), "tags": Tag.db_out(self.tags)}
 
     def out_dict(self):
-        return {"id": str(self.m_id),
+        return {
+            "id": str(self.m_id),
                 "lecturer": Lecturer.out(self.lecturers),
                 "tags": Tag.out(self.tags),
                 "segments": self.segments,
