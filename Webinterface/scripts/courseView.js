@@ -9,7 +9,7 @@ window.addEventListener('load', function() {
         },
         method: 'GET',
         success: function(data) {
-            let lecture = data['course'];
+            let lecture = data['courses'];
             let course = new Course();
             course.setCourseName(lecture[0]['title']);
             course.setCourseAddition(lecture[0]['readable_id']);
