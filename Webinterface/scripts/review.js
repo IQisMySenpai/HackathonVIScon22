@@ -98,7 +98,7 @@ class Review {
         html += '</div> - <div class="reviewDate">';
         let dateObj = new Date(date);
         html += '' + dateObj.getDate() + '.' + (dateObj.getMonth() + 1) + '.' + dateObj.getFullYear();
-        html += '</div> <button class="reviewReport">- Report</button></div>';
+        html += '</div> <button class="reviewReport" onclick="report(this)">- Report</button></div>';
 
         this._oldReviews.append(html);
     }
