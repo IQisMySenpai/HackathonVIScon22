@@ -19,8 +19,12 @@ window.addEventListener('load', function() {
             }
             course.setCourseDescription(desc);
 
-            course.addCourseTags([{'name': 'Informatik', 'color': 'dark sea green'}, {'name': 'Sem 1', 'color':'orchid'}, {'name': 'GlasKlar', 'color':'salmon'}, {'name': 'Exam', 'color':'lightgreen'}]);
-            course.addCourseRatings([{'name': 'Difficulty', 'rating': 10}, {'name': 'Workload', 'rating': 7}, {'name': 'Jokes', 'rating': 5}]);
+            course.addCourseTags(lecture[0]['tags']);
+            if (lecture[0]['ratings'] == null || lecture[0]['ratings'].length === 0 || lecture[0]['ratings'] === undefined) {
+                course.addCourseRatings([{'name': 'Difficulty', 'rating': 0}, {'name': 'Workload', 'rating': 0}, {'name': 'Jokes', 'rating': 0}]);
+            } else {
+                course.addCourseRatings(lecture[0]['ratings']);
+            }
 
             let review = new Review(id);
         },
