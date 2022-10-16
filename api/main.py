@@ -49,7 +49,7 @@ def read_courses(response: Response, query: str = None,  tags: str = None, page:
     return query_courses(mongo, response, query, tags, page)
 
 @api.post("/courses/review")
-def post_review(review: Review, response: Response):
+def post_review(review: Review, request: Request, response: Response):
 
     if review.course_id is None:
         return pack_response(response, 400, "missing course id")
@@ -59,7 +59,19 @@ def post_review(review: Review, response: Response):
         except (bson.errors.InvalidId, ValueError):
             return pack_response(response, 400, "Invalid course id")
 
-    return create_review(mongo, response, review)
+    return create_review(mongo, request, response, review)
+@api.post("/courses/review/report")
+def post_report_review(course_id:str, review_id: str, request: Request, response: Response):
+
+    try:
+        course_id = bson.objectid.ObjectId(course_id)
+        review_id = bson.objectid.ObjectId(review_id)
+    except (bson.errors.InvalidId, ValueError):
+        return pack_response(response, 400, "invalid id")
+
+
+    return flag_review(mongo, request, response, course_id, review_id)
+
 
 @api.post("/courses")
 def post_course(course: Course, response: Response):

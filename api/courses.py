@@ -57,6 +57,7 @@ def load_courses_helper(courses: List[dict], db: MongoAPI, response: Response):
 
     course_list: List[Course] = Course.from_db(courses)
     load_lecturer_for_courses(db, course_list)
+    filter_reported_reviews(course_list)
 
     return pack_response(response, 200, "ok", {"courses": Course.out(course_list)})
 
@@ -69,11 +70,6 @@ def list_courses(db: MongoAPI, response: Response, course_id: ObjectId, page: in
     return load_courses_helper(courses, db, response)
 
 def query_courses(db: MongoAPI, response: Response, query: str, tags: List[str] = None, page: int = 0):
-
-    # name
-    # mongo id
-    # readable-id
-    # description
 
     regex = None
     if query is not None:
@@ -108,10 +104,16 @@ def create_course(db: MongoAPI, response: Response, course: Course):
 
     return pack_response(response, 200, "ok", {"id": course.id.__str__()})
 
-def create_review(db: MongoAPI, response: Response, review: Review):
+def create_review(db: MongoAPI, request: Request, response: Response, review: Review):
 
+    data, logged = test_login(request, response)
+    if not logged:
+        return pack_response(response, 403, "sign in pls")
+
+    review.username = data["preferred_username"]
     review.is_reported = False
     review.m_id = bson.objectid.ObjectId()
+    review.date = time.time()
 
     count = db.update("courses", {'_id': review.course_id}, {
         '$push': {
@@ -123,20 +125,43 @@ def create_review(db: MongoAPI, response: Response, review: Review):
         return pack_response(response, 400, "No course has been updated")
     return pack_response(response, 200, "ok")
 
+def flag_review(db: MongoAPI, request: Request, response: Response, course_id: ObjectId, review_id: ObjectId):
 
+    data, logged = test_login(request, response)
+    if not logged:
+        return pack_response(response, 403, "sign in pls")
+
+    username = data["preferred_username"]
+    result = db.find_one("moderators", {'username': username})
+
+    if result is None:
+        return pack_response(response, 403, "forbidden?")
+
+    count = db.update("courses", {"_id": course_id, "reviews._id": review_id}, {"$set": {'reviews.$.is_reported': True}})
+
+    if count == 0:
+        return pack_response(response, 400, "no review updated")
+
+    return pack_response(response, 200, "ok")
+
+
+def filter_reported_reviews(courses: List[Course]):
+    for course in courses:
+        if course.reviews is None:
+            continue
+        course.reviews = [review for review in course.reviews if not review.is_reported]
 def load_lecturer_for_courses(db: MongoAPI, courses: List[Course]):
     for course in courses:
         if course.lecturers is None:
             continue
         course.lecturers = Lecturer.from_db(db.find("professors", find_all_id_query(course.lecturers), limit=10))
 
-
 def test_login(request: Request, response: Response):
     id_token = request.headers.get("Authorization")
     print(id_token)
 
     if id_token is None:
-        return pack_response(response=response, status=401, message="Login required")
+        return pack_response(response=response, status=401, message="Login required"), False
 
     try:
         user_info = jwt.decode(jwt=id_token, key=key, algorithms=["RS256"], options={"verify_aud": False}), False
