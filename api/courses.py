@@ -147,6 +147,8 @@ def flag_review(db: MongoAPI, request: Request, response: Response, course_id: O
 
 def filter_reported_reviews(courses: List[Course]):
     for course in courses:
+        if course.reviews is None:
+            continue
         course.reviews = [review for review in course.reviews if not review.is_reported]
 def load_lecturer_for_courses(db: MongoAPI, courses: List[Course]):
     for course in courses:
