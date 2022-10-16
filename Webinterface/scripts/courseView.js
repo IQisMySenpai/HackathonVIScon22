@@ -37,9 +37,10 @@ window.addEventListener('load', function() {
 
             let reviews = lecture[0]['reviews'];
 
-            for (let i = 0; i < ratings.length; i++) {
+            for (let i = 0; i < reviews.length; i++) {
+                let r = reviews[i]['rating'];
                 for (let i = 0; i < ratings.length; i++) {
-                    avg_rating[ratings[i]['name']] += ratings[i]['rating'];
+                    avg_rating[r[i]['name']] += r[i]['rating'];
                 }
                 count += 1;
             }
@@ -51,6 +52,9 @@ window.addEventListener('load', function() {
             for (let i = 0; i < ratings.length; i++) {
                 ratings[i]['rating'] = avg_rating[ratings[i]['name']];
             }
+
+            console.log(avg_rating);
+            console.log(ratings);
 
             course.addCourseRatings(ratings);
 
