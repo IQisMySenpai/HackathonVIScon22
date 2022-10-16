@@ -46,7 +46,7 @@ window.addEventListener('load', function() {
             }
 
             for (let r in avg_rating) {
-                avg_rating[r] /= count;
+                avg_rating[r] = Math.floor(avg_rating[r] / (count));
             }
 
             for (let i = 0; i < ratings.length; i++) {
