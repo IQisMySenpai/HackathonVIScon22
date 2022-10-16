@@ -240,6 +240,7 @@ function postReview () {
 
     if (cookie === undefined || cookie === null || cookie === '') {
         alert('You must be logged in to post a review.');
+        return;
     }
 
     $.ajax({
