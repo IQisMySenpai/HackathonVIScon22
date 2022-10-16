@@ -64,29 +64,25 @@ def list_courses(db: MongoAPI, response: Response, page):
     courses = db.find("courses", skip=20 * page, limit=20)
     return load_courses_helper(courses, db, response)
 
-
-def query_courses(db: MongoAPI, response: Response, query: str, tags: List[str] = Query(default=None), page: int = 0):
+def query_courses(db: MongoAPI, response: Response, query: str, tags: List[str] = None, page: int = 0):
 
     # name
     # mongo id
     # readable-id
     # description
 
+    regex = None
     if query is not None:
         regex = ".*" + query + ".*"
         regex = regex.replace(" ", ".*")
 
-    if tags is not None:
-        tags = [ObjectId(tag) for tag in tags]
-
-    print(tags)
     courses = None
     if query is not None and tags is None:
         courses = list(db.collection("courses").find({"title": {"$regex": regex, '$options': 'i'}}).skip(20*page).limit(20))
     elif query is not None and tags is not None:
-        courses = list(db.collection("courses").find({"title": {"$regex": regex, '$options': 'i'}, "tags._id": {"$in": tags}}).skip(20*page).limit(20))
+        courses = list(db.collection("courses").find({"title": {"$regex": regex, '$options': 'i'}, "tags._id": {"$all": tags}}).skip(20*page).limit(20))
     elif query is None and Tag is not None:
-        courses = list(db.collection("courses").find({"tags._id": {"$in": tags}}).skip(20*page).limit(20))
+        courses = list(db.collection("courses").find({"tags._id": {"$all": tags}}).skip(20*page).limit(20))
     else:
         return pack_response(response, 400, "Specify tags or query.")
 
