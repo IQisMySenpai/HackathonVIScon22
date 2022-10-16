@@ -26,8 +26,15 @@ def post_tag(tag: Tag, response: Response):
 #    return list_lecturers(mongo, response)
 
 @api.get("/courses")
-def read_courses(response: Response, page: int = 0):
-    return list_courses(mongo, response, page)
+def read_courses(response: Response, course_id: Union[str, None] = None, page: int = 0):
+
+    if course_id is not None:
+        try:
+            course_id = ObjectId(course_id)
+        except (bson.errors.InvalidId, ValueError):
+            return pack_response(response, 400, "invalid id")
+
+    return list_courses(mongo, response, course_id, page)
 
 @api.get("/query/courses")
 def read_courses(response: Response, query: str = None,  tags: str = None, page: int = 0):

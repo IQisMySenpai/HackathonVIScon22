@@ -60,8 +60,11 @@ def load_courses_helper(courses: List[dict], db: MongoAPI, response: Response):
     return pack_response(response, 200, "ok", {"courses": Course.out(course_list)})
 
 
-def list_courses(db: MongoAPI, response: Response, page):
-    courses = db.find("courses", skip=20 * page, limit=20)
+def list_courses(db: MongoAPI, response: Response, course_id: ObjectId, page: int):
+    if course_id is None:
+        courses = db.find("courses", skip=20 * page, limit=20)
+    else:
+        courses = db.find("courses", filter_dict={'_id': course_id}, limit=1)
     return load_courses_helper(courses, db, response)
 
 def query_courses(db: MongoAPI, response: Response, query: str, tags: List[str] = None, page: int = 0):
