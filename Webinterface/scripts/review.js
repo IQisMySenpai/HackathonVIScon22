@@ -16,12 +16,12 @@ class Review {
             url: '/api/tags',
             method: 'GET',
             success: function(data) {
-                ref._tags = this.data['tags'];
+                ref._tags = data['tags'];
                 ref.newReviewField([{'name': 'Difficulty'}, {'name': 'Workload'}, {'name': 'Jokes'}]);
 
                 ref.oldReviews();
 
-                $.ajax({
+                /*$.ajax({
                     url: '/api/reviews',
                     data: {
                         'course_id': ref._id
@@ -33,7 +33,7 @@ class Review {
                     error: function(data) {
                         alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
                     }
-                });
+                });*/
             },
             error: function(data) {
                 alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
