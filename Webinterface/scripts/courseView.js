@@ -38,9 +38,9 @@ window.addEventListener('load', function() {
             let reviews = lecture[0]['reviews'];
 
             for (let i = 0; i < reviews.length; i++) {
-                let r = reviews[i]['rating'];
-                for (let i = 0; i < ratings.length; i++) {
-                    avg_rating[r[i]['name']] += r[i]['rating'];
+                let r = reviews[i]['ratings'];
+                for (let i = 0; i < r.length; i++) {
+                    avg_rating[r[i]['name']] += r['rating'];
                 }
                 count += 1;
             }
