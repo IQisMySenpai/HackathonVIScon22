@@ -186,7 +186,7 @@ def test_login(request: Request, response: Response):
         return pack_response(response=response, status=401, message="Login required"), False
 
     try:
-        user_info = jwt.decode(jwt=id_token, key=key, algorithms=["RS256"], options={"verify_aud": False}), False
+        user_info = jwt.decode(jwt=id_token, key=key, algorithms=["RS256"], options={"verify_aud": False})
     except jex.InvalidSignatureError:
         return pack_response(response=response, status=401, message="Invalid Authorisation, Login Again"), False
     except jex.ExpiredSignatureError:
