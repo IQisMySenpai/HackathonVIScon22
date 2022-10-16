@@ -206,19 +206,19 @@ def get_lecturer_image(response: Response, vvz_id: int):
     svg = os.path.join(folder, f"{vvz_id}.svg")
 
     if os.path.exists(jpg):
-        return pack_response(response, 200, "Success", {"path": jpg})
+        return pack_response(response, 200, "Success", {"path": os.path.join("test_images", os.path.basename(jpg))})
 
     if os.path.exists(jpeg):
-        return pack_response(response, 200, "Success", {"path": jpeg})
+        return pack_response(response, 200, "Success", {"path": os.path.join("test_images", os.path.basename(jpeg))})
 
     if os.path.exists(png):
-        return pack_response(response, 200, "Success", {"path": png})
+        return pack_response(response, 200, "Success", {"path": os.path.join("test_images", os.path.basename(png))})
 
     if os.path.exists(gif):
-        return pack_response(response, 200, "Success", {"path": gif})
+        return pack_response(response, 200, "Success", {"path": os.path.join("test_images", os.path.basename(gif))})
 
     if os.path.exists(svg):
-        return pack_response(response, 200, "Success", {"path": svg})
+        return pack_response(response, 200, "Success", {"path": os.path.join("test_images", os.path.basename(svg))})
 
     return pack_response(response, 404, "No Image found", {})
 
