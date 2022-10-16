@@ -60,6 +60,8 @@ def post_review(review: Review, request: Request, response: Response):
             return pack_response(response, 400, "Invalid course id")
 
     return create_review(mongo, request, response, review)
+
+
 @api.post("/courses/review/report")
 def post_report_review(course_id:str, review_id: str, request: Request, response: Response):
 
@@ -82,6 +84,10 @@ def post_course(course: Course, response: Response):
 def post_test_login(request: Request, response: Response):
     return test_login(request, response)
 
+
+@api.get("/image-url")
+def get_image_url(response: Response, vvz_id: int):
+    return get_lecturer_image(response, vvz_id)
 
 app.mount("/api", api)
 app.mount("/", StaticFiles(directory="../Webinterface", html=True), name="WebInterface")
