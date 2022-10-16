@@ -20,41 +20,11 @@ window.addEventListener('load', function() {
             course.setCourseDescription(desc);
 
             course.addCourseTags(lecture[0]['tags']);
-            let ratings = lecture[0]['ratings'];
+            let ratings = lecture[0]['reviews'][0]['ratings'];
 
             if (ratings == null || ratings.length === 0) {
                 ratings = [{'name': 'Difficulty', 'rating': 0}, {'name': 'Workload', 'rating': 0}, {'name': 'Jokes', 'rating': 0}];
             }
-
-            let count = 0;
-            let avg_rating = {};
-            for (let i = 0; i < ratings.length; i++) {
-                if (avg_rating[ratings[i]['name']] === undefined) {
-                    avg_rating[ratings[i]['name']] = 0;
-                }
-                avg_rating[ratings[i]['name']] += ratings[i]['rating'];
-            }
-
-            let reviews = lecture[0]['reviews'];
-
-            for (let i = 0; i < reviews.length; i++) {
-                let r = reviews[i]['ratings'];
-                for (let i = 0; i < r.length; i++) {
-                    avg_rating[r[i]['name']] += r['rating'];
-                }
-                count += 1;
-            }
-
-            for (let r in avg_rating) {
-                avg_rating[r] = Math.floor(avg_rating[r] / (count));
-            }
-
-            for (let i = 0; i < ratings.length; i++) {
-                ratings[i]['rating'] = avg_rating[ratings[i]['name']];
-            }
-
-            console.log(avg_rating);
-            console.log(ratings);
 
             course.addCourseRatings(ratings);
 
