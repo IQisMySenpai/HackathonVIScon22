@@ -98,7 +98,7 @@ class Review {
         html += '</div> - <div class="reviewDate">';
         let dateObj = new Date(date);
         html += '' + dateObj.getDate() + '.' + (dateObj.getMonth() + 1) + '.' + dateObj.getFullYear();
-        html += '</div> <button class="reviewReport">- Report</button></div>';
+        html += '</div> <button class="reviewReport" onclick="report(this)">- Report</button></div>';
 
         this._oldReviews.append(html);
     }
@@ -274,7 +274,8 @@ function postReview () {
 
 function report (element) {
     let id = $('.courseHeader').attr('id');
-    let reviewId = $(element).closest('.review').attr('id');
+    let review = $(element).closest('.review');
+    let reviewId = review.attr('id');
     let cookie = getCookies()['id_token'];
 
     if (cookie === undefined || cookie === null || cookie === '') {
@@ -284,7 +285,7 @@ function report (element) {
 
     $.ajax({
         url: '/api/courses/review/report',
-        method: 'POST',
+        method: 'GET',
         data: {
             course_id: id,
             review_id: reviewId
@@ -294,6 +295,7 @@ function report (element) {
         },
         success: function(data) {
             alert('Course Reported');
+            review.remove();
         },
         error: function(data) {
             alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
