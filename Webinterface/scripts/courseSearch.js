@@ -39,7 +39,7 @@ window.addEventListener('load', function() {
     let params = getParameters('search');
 
     let data = {
-        query: params['query']
+        query: decodeURI(params['query'])
     };
 
     if (params['tags'] !== undefined) {

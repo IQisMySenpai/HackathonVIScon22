@@ -30,6 +30,12 @@ window.addEventListener('load', function() {
             alert('Error [' + xhr.status + '] while running getting Tags:\n\n' + data.responseText);
         }
     });
+
+    $('.search').on('keyup', function(e) {
+        if (e.keyCode === 13) {
+            search();
+        }
+    });
 });
 
 function createTags (tags) {
