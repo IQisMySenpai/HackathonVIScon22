@@ -173,6 +173,30 @@ def filter_reported_reviews(courses: List[Course]):
         if course.reviews is None:
             continue
         course.reviews = [review for review in course.reviews if not review.is_reported]
+
+def calculate_average_rating(courses: List[Course]):
+    ratings = []
+    for course in courses:
+        if course.reviews is None:
+            continue
+        avg = {}
+        for review in course.reviews:
+            if review.rating is None:
+                continue
+            for rating in review.rating:
+                if rating.name not in avg:
+                    avg[rating.name] = [rating.rating, 1]
+                else:
+                    avg[rating.name][0] += rating.rating
+                    avg[rating.name][1] += 1
+
+        result = []
+        for k in avg.keys():
+            result.append(avg[k][0] / avg[k][1])
+
+        ratings.append(result)
+    return ratings
+
 def load_lecturer_for_courses(db: MongoAPI, courses: List[Course]):
     for course in courses:
         if course.lecturers is None:

@@ -294,8 +294,8 @@ function report (element) {
             'Authorization': cookie || ''
         },
         success: function(data) {
-            alert('Course Reported');
             review.remove();
+            alert('Course Reported');
         },
         error: function(data) {
             alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
