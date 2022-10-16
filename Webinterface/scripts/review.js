@@ -10,9 +10,8 @@ class Review {
         this._review = $('<div class="reviews"></div>');
         $('main').append(this._review);
 
-        let ref = this;
 
-        $.ajax({
+        /*$.ajax({
             url: '/api/tags',
             method: 'GET',
             success: function(data) {
@@ -21,7 +20,7 @@ class Review {
 
                 ref.oldReviews();
 
-                /*$.ajax({
+                $.ajax({
                     url: '/api/reviews',
                     data: {
                         'course_id': ref._id
@@ -33,12 +32,12 @@ class Review {
                     error: function(data) {
                         alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
                     }
-                });*/
+                });
             },
             error: function(data) {
                 alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
             }
-        });
+        });*/
     }
 
     newReviewField(ratings) {
@@ -256,35 +255,37 @@ function postReview () {
 
     console.log(data);
 
-    // Clear Values
-    textElement.val('');
-    posElement.val('');
-    negElement.val('');
-    tagElements.each(function () {
-        let tag = $(this);
-        $('select.newTagSelect').append('<option data-color="' + tag.data('color') + '" value="' + tag.data('id') + '">' + tag.html() + '</option>');
-        tag.remove();
-    });
-    ratingElements.each(function () {
-        let rating = $(this);
-        rating.find('.newReviewRatingStars input').val(0);
-        rating.find('.newReviewRatingStars').html(getStars(0));
-    });
+    let cookie = getCookies()['id_token'];
 
-    console.log({'id_token': getCookies['id_token'] || ''})
+    if (cookie === undefined || cookie === null || cookie === '') {
+        alert('You must be logged in to post a review.');
+    }
 
-    /*$.ajax({
-        url: '/api/createReview',
-        method: 'GET',
+    $.ajax({
+        url: '/api/courses/review',
+        method: 'POST',
         data: data,
         headers: {
-            'Authorization': getCookie('id_token') || ''
-        }
+            'Authorization': cookie || ''
+        },
         success: function(data) {
-
+            // Clear Values
+            textElement.val('');
+            posElement.val('');
+            negElement.val('');
+            tagElements.each(function () {
+                let tag = $(this);
+                $('select.newTagSelect').append('<option data-color="' + tag.data('color') + '" value="' + tag.data('id') + '">' + tag.html() + '</option>');
+                tag.remove();
+            });
+            ratingElements.each(function () {
+                let rating = $(this);
+                rating.find('.newReviewRatingStars input').val(0);
+                rating.find('.newReviewRatingStars').html(getStars(0));
+            });
         },
         error: function(data) {
             alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
         }
-    });*/
+    });
 }

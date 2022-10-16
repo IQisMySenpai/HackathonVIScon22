@@ -20,13 +20,27 @@ window.addEventListener('load', function() {
             course.setCourseDescription(desc);
 
             course.addCourseTags(lecture[0]['tags']);
-            if (lecture[0]['ratings'] == null || lecture[0]['ratings'].length === 0 || lecture[0]['ratings'] === undefined) {
-                course.addCourseRatings([{'name': 'Difficulty', 'rating': 0}, {'name': 'Workload', 'rating': 0}, {'name': 'Jokes', 'rating': 0}]);
-            } else {
-                course.addCourseRatings(lecture[0]['ratings']);
+            let ratings = lecture[0]['ratings'];
+            if (ratings == null || ratings.length === 0) {
+                ratings = [{'name': 'Difficulty', 'rating': 0}, {'name': 'Workload', 'rating': 0}, {'name': 'Jokes', 'rating': 0}];
             }
+            course.addCourseRatings(ratings);
 
             let review = new Review(id);
+
+            $.ajax({
+                url: '/api/tags',
+                method: 'GET',
+                success: function(stuff) {
+                    review._tags = stuff['tags'];
+                    review.newReviewField(ratings);
+                },
+                error: function(data) {
+                    alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
+                }
+            });
+
+
         },
         error: function(data) {
             alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
