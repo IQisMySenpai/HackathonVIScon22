@@ -8,8 +8,8 @@ class Course {
         $('main').append(this._course);
     }
 
-    setCourseName(name) {
-        this._course.append('<div class="courseHeader">' + name + '</div>');
+    setCourseName(name, id) {
+        this._course.append('<div class="courseHeader" id="' + id + '">' + name + '</div>');
         $('title').html(name);
         return this;
     }

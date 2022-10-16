@@ -110,7 +110,8 @@ def create_review(db: MongoAPI, request: Request, response: Response, review: Re
     if not logged:
         return pack_response(response, 403, "sign in pls")
 
-    review.username = data["preferred_username"]
+    print(data)
+    review.author = data["preferred_username"]
     review.is_reported = False
     review.m_id = bson.objectid.ObjectId()
     review.date = time.time()
@@ -123,6 +124,27 @@ def create_review(db: MongoAPI, request: Request, response: Response, review: Re
 
     if count == 0:
         return pack_response(response, 400, "No course has been updated")
+
+    if review.tags is not None:
+        try:
+            tags = [ObjectId(tag) for tag in review.tags]
+        except (bson.objectid.InvalidId, ValueError):
+            return pack_response(response, 200, "Ok, but tags were not added")
+
+        fetched_tags = Tag.from_db(db.find("tags", {'_id': {'$in': tags}}))
+        # unsafe [0]ru2
+        course = Course.from_db(db.find("courses", {'_id': review.course_id}))[0]
+        print(fetched_tags)
+        print(course.tags)
+        for tag in fetched_tags:
+            do_add = True
+            if course.tags is not None:
+                for existing_tag in course.tags:
+                    if existing_tag.id == tag.id:
+                        do_add = False
+            if do_add:
+                db.update("courses", {'_id': course.m_id}, {'$push': {'tags': tag.db_dict()}})
+
     return pack_response(response, 200, "ok")
 
 def flag_review(db: MongoAPI, request: Request, response: Response, course_id: ObjectId, review_id: ObjectId):
@@ -164,7 +186,7 @@ def test_login(request: Request, response: Response):
         return pack_response(response=response, status=401, message="Login required"), False
 
     try:
-        user_info = jwt.decode(jwt=id_token, key=key, algorithms=["RS256"], options={"verify_aud": False}), False
+        user_info = jwt.decode(jwt=id_token, key=key, algorithms=["RS256"], options={"verify_aud": False})
     except jex.InvalidSignatureError:
         return pack_response(response=response, status=401, message="Invalid Authorisation, Login Again"), False
     except jex.ExpiredSignatureError:

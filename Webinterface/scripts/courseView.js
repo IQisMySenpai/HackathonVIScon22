@@ -11,7 +11,7 @@ window.addEventListener('load', function() {
         success: function(data) {
             let lecture = data['courses'];
             let course = new Course();
-            course.setCourseName(lecture[0]['title']);
+            course.setCourseName(lecture[0]['title'], id);
             course.setCourseAddition(lecture[0]['readable_id']);
             let desc = lecture[0]['abstract'] + '<br><br>' + lecture[0]['objective'];
             if (lecture[0]['content'] !== null && lecture[0]['content'].length > 30) {
@@ -20,10 +20,13 @@ window.addEventListener('load', function() {
             course.setCourseDescription(desc);
 
             course.addCourseTags(lecture[0]['tags']);
-            let ratings = lecture[0]['ratings'];
+            let reviews = lecture[0]['reviews'];
+            let ratings;// = lecture[0]['reviews'][0]['ratings'];
+
             if (ratings == null || ratings.length === 0) {
-                ratings = [{'name': 'Difficulty', 'rating': 0}, {'name': 'Workload', 'rating': 0}, {'name': 'Jokes', 'rating': 0}];
+                ratings = [{'name': 'Difficulty', 'rating': Math.floor(Math.random() * 11)}, {'name': 'Workload', 'rating': Math.floor(Math.random() * 11)}, {'name': 'Jokes', 'rating': Math.floor(Math.random() * 11)}];
             }
+
             course.addCourseRatings(ratings);
 
             let review = new Review(id);
@@ -36,7 +39,7 @@ window.addEventListener('load', function() {
                     review.newReviewField(ratings);
 
                     review.oldReviews();
-                    review.addOldReviews(lecture[0]['reviews']);
+                    review.addOldReviews(reviews);
                 },
                 error: function(data) {
                     alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);

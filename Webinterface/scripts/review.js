@@ -66,18 +66,14 @@ class Review {
         return this;
     }
 
-    addOldReview(username, date, rating, text, pos, neg) {
+    addOldReview(username, date, rating, text, pos, neg, id) {
         if (!this._reviews) {
             this.oldReviews();
         }
 
         let html = '';
 
-        if (this._review_count > 0) {
-            html += '<hr>';
-        }
-
-        html += '<div class="review"><div class="reviewContent"><div class="reviewTexts">'
+        html += '<div class="review" id="' + id + '"><div class="reviewContent"><div class="reviewTexts">'
         html += '<div class="reviewTextArea">' + text + '</div>';
         html += '<div class="reviewPosVNegs"><div class="reviewPos">';
         for (let i = 0; i < pos.length; i++) {
@@ -102,14 +98,14 @@ class Review {
         html += '</div> - <div class="reviewDate">';
         let dateObj = new Date(date);
         html += '' + dateObj.getDate() + '.' + (dateObj.getMonth() + 1) + '.' + dateObj.getFullYear();
-        html += '</div> <div class="reviewReport">- Report</div></div>';
+        html += '</div> <button class="reviewReport">- Report</button></div>';
 
         this._oldReviews.append(html);
     }
 
     addOldReviews(reviews) {
         for (let i = 0; i < reviews.length; i++) {
-            this.addOldReview(reviews[i]['author'], reviews[i]['date'], reviews[i]['ratings'], reviews[i]['text'], reviews[i]['pos'], reviews[i]['neg']);
+            this.addOldReview(reviews[i]['author'], reviews[i]['date'], reviews[i]['ratings'], reviews[i]['text'], reviews[i]['pos'], reviews[i]['neg'], reviews[i]['id']);
         }
     }
 }
@@ -226,15 +222,16 @@ function postReview () {
         tags.push(tagElement.data('id'));
     }
 
+    let id = $('.courseHeader').attr('id');
+
     let data = {
+        course_id: id,
         text: text,
         pos: pos,
         neg: neg,
         rating: rating,
         tags: tags
     };
-
-    console.log(data);
 
     let cookie = getCookies()['id_token'];
 
@@ -246,7 +243,10 @@ function postReview () {
     $.ajax({
         url: '/api/courses/review',
         method: 'POST',
-        data: data,
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        processData: false,
         headers: {
             'Authorization': cookie || ''
         },
@@ -265,6 +265,35 @@ function postReview () {
                 rating.find('.newReviewRatingStars input').val(0);
                 rating.find('.newReviewRatingStars').html(getStars(0));
             });
+        },
+        error: function(data) {
+            alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
+        }
+    });
+}
+
+function report (element) {
+    let id = $('.courseHeader').attr('id');
+    let reviewId = $(element).closest('.review').attr('id');
+    let cookie = getCookies()['id_token'];
+
+    if (cookie === undefined || cookie === null || cookie === '') {
+        alert('You must be logged in to report a report.');
+        return;
+    }
+
+    $.ajax({
+        url: '/api/courses/review/report',
+        method: 'POST',
+        data: {
+            course_id: id,
+            review_id: reviewId
+        },
+        headers: {
+            'Authorization': cookie || ''
+        },
+        success: function(data) {
+            alert('Course Reported');
         },
         error: function(data) {
             alert('\'Error [\' + xhr.status + \'] while running getting Tags:\n\n' + data.responseText);
