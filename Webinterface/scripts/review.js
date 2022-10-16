@@ -4,6 +4,7 @@ class Review {
     _reviews = false
     _oldReviews = null;
     _tags = [];
+    _review_count = 0;
 
     constructor(id) {
         this._id = id;
@@ -70,7 +71,13 @@ class Review {
             this.oldReviews();
         }
 
-        let html = '<div class="review"><div class="reviewContent"><div class="reviewTexts">'
+        let html = '';
+
+        if (this._review_count > 0) {
+            html += '<hr>';
+        }
+
+        html += '<div class="review"><div class="reviewContent"><div class="reviewTexts">'
         html += '<div class="reviewTextArea">' + text + '</div>';
         html += '<div class="reviewPosVNegs"><div class="reviewPos">';
         for (let i = 0; i < pos.length; i++) {
