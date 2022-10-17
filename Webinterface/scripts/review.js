@@ -96,7 +96,7 @@ class Review {
         html += '<div class="reviewInfo"><div class="reviewUsername">';
         html += username;
         html += '</div> - <div class="reviewDate">';
-        let dateObj = new Date(date);
+        let dateObj = new Date(date * 1000);
         html += '' + dateObj.getDate() + '.' + (dateObj.getMonth() + 1) + '.' + dateObj.getFullYear();
         html += '</div> <button class="reviewReport" onclick="report(this)">- Report</button></div>';
 

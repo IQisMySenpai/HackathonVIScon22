@@ -47,10 +47,10 @@ students can exchange information about courses at ETH.
 - [Zhao Na](https://github.com/zhaona99)
 
 ### Built With
-
 - [Javascript](https://www.javascript.com)
 - [CSS](https://developer.mozilla.org/en-US/docs/Glossary/CSS)
 - [HTML](https://developer.mozilla.org/en-US/docs/Glossary/HTML)
-
-## To-Do
-- [ ] Create a database
+- [Python](https://www.python.org)
+- [Uvicorn](https://www.uvicorn.org)
+- [MongoDB](https://www.mongodb.com)
+- [FastAPI](https://fastapi.tiangolo.com)
