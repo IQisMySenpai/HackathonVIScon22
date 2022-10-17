@@ -9,11 +9,17 @@ class MongoAPI:
     dummy_write: str
     dummy_update: str
 
-    def __init__(self, db_address: str, db_name: str, db_username: str, db_password: str):
-
+    def __init__(self, db_address: str, db_name: str, db_username: str, db_password: str, **kwargs):
+        """
+        :param db_address: Database Address like db.something.mongodb.net
+        :param db_name: name of the database
+        :param db_username: username
+        :param db_password: password to username
+        :param kwargs: Passed to the MongoClient.__init__ method. (i.e. tlsCAFile=certify.where())
+        """
         # initialising connection to Mongo
         self.client = pymongo.MongoClient(f"mongodb+srv://{db_username}:{db_password}@{db_address}/"
-                                          f"{db_name}")
+                                          f"{db_name}", **kwargs)
 
         self.db_name = db_name
 
