@@ -87,5 +87,7 @@ def post_test_login(request: Request, response: Response):
 def get_image_url(response: Response, vvz_id: int):
     return get_lecturer_image(response, vvz_id)
 
+
 app.mount("/api", api)
-app.mount("/", StaticFiles(directory="../Webinterface", html=True), name="WebInterface")
+# app.mount("/", StaticFiles(directory="../Webinterface", html=True), name="WebInterface")
+app.mount("/", StaticFiles(directory="Webinterface", html=True), name="WebInterface")
