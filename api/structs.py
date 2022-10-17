@@ -13,7 +13,7 @@ class Tag(BaseModel):
     color: Union[str, None] = None
 
     @staticmethod
-    def from_db(tags):
+    def from_db(tags) -> list:
         return [Tag().from_dict(d) for d in tags]
 
     @staticmethod
@@ -35,7 +35,10 @@ class Tag(BaseModel):
         return self
 
     def db_dict(self):
-        return {"name": self.name, "color": self.color}
+        temp = {"name": self.name, "color": self.color}
+        if self.id is not None:
+            temp["_id"] = self.id
+        return temp
 
     def out_dict(self):
         return {"id": self.id.__str__(), "name": self.name, "color": self.color}
@@ -162,7 +165,7 @@ class Course(BaseModel):
     reviews: Union[List[Review], None] = None
 
     @staticmethod
-    def from_db(courses):
+    def from_db(courses) -> list:
         return [Course().from_dict(d) for d in courses]
 
     @staticmethod

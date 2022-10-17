@@ -132,18 +132,19 @@ def create_review(db: MongoAPI, request: Request, response: Response, review: Re
         except (bson.objectid.InvalidId, ValueError):
             return pack_response(response, 200, "Ok, but tags were not added")
 
-        fetched_tags = Tag.from_db(db.find("tags", {'_id': {'$in': tags}}))
+        fetched_tags: List[Tag] = Tag.from_db(db.find("tags", {'_id': {'$in': tags}}))
         # unsafe [0]ru2
-        course = Course.from_db(db.find("courses", {'_id': review.course_id}))[0]
+        course: Course = Course.from_db(db.find("courses", {'_id': review.course_id}))[0]
+
+        tag_ids = []
+        if course.tags is not None:
+            tag_ids = [tg.id for tg in course.tags]
         print(fetched_tags)
         print(course.tags)
+
         for tag in fetched_tags:
             do_add = True
-            if course.tags is not None:
-                for existing_tag in course.tags:
-                    if existing_tag.id == tag.id:
-                        do_add = False
-            if do_add:
+            if tag.id not in tag_ids:
                 db.update("courses", {'_id': course.m_id}, {'$push': {'tags': tag.db_dict()}})
 
     return pack_response(response, 200, "ok")
