@@ -89,5 +89,5 @@ def get_image_url(response: Response, vvz_id: int):
 
 
 app.mount("/api", api)
-# app.mount("/", StaticFiles(directory="../Webinterface", html=True), name="WebInterface")
-app.mount("/", StaticFiles(directory="Webinterface", html=True), name="WebInterface")
+app.mount("/", StaticFiles(directory="../Webinterface", html=True), name="WebInterface")
+# app.mount("/", StaticFiles(directory="Webinterface", html=True), name="WebInterface")
