@@ -23,7 +23,7 @@ window.addEventListener('load', function() {
 function loginButton () {
     let button = $('.login').find('.navBarLink');
     button.html('Login');
-    button.attr('href', 'https://auth.vseth.ethz.ch/auth/realms/VSETH/protocol/openid-connect/auth?client_id=vseth-team-11&response_type=id_token&redirect_url=localhost&nonce=' + randstring(12));
+    button.attr('href', 'https://auth.vseth.ethz.ch/auth/realms/VSETH/protocol/openid-connect/auth?client_id=vseth-team-11&response_type=id_token&return=http%3A%2F%2Flocalhost%3A8000%2F&nonce=' + randstring(12));
 }
 
 function randstring(length) {
