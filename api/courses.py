@@ -5,8 +5,8 @@ from mongo_api import *
 from api_common import *
 from structs import *
 from typing import List
-import jwt
-import jwt.exceptions as jex
+import jose.jwt as jwt
+import jose.exceptions as jex
 import os
 
 # ======================================================================================================================
@@ -211,6 +211,7 @@ def test_login(request: Request, response: Response):
     if id_token is None:
         return pack_response(response=response, status=401, message="Login required"), False
 
+    # TODO this seems to be broken now with new dependencies.
     try:
         user_info = jwt.decode(jwt=id_token, key=key, algorithms=["RS256"], options={"verify_aud": False})
     except jex.InvalidSignatureError:
